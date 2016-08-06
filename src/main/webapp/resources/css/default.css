@@ -1,0 +1,328 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	background:#FFFFFF;
+	}
+.clean0{
+	clear:both;
+	}
+	
+.banner{
+	height: 100px;
+	background-color:#277BFC;
+	}
+	
+.banner h3{
+	line-height: 100px;
+	font-family:Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color:#FFFFFF;
+	font-size:30px;
+	font-weight:bold;
+	text-align:center;
+	margin: 0px;
+	}
+	
+.nav{
+	height:60px;
+	line-height: 60px;
+	margin: 5px;
+	padding: 0;
+	}
+.nav ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	}
+.nav ul li{
+	float: left;
+	padding: 0px 5px;
+	margin: 0px 5px;
+	}
+.nav ul li a{
+	color:rgba(102,102,102,1);
+	text-decoration: none;
+	padding: 0 10px;
+	display: block;
+	font-size:24px;
+	height:60px;
+	}
+.nav ul li a:hover, nav ul li .active {
+	background: #5087FF;
+	border-radius: 5px;
+	color:#FFFFFF;
+	height: 60px;
+	line-height:60px;
+	}
+.dangxuat {
+	float: right;
+	margin: 10px 20px 5px 0px;
+	}
+.dangxuat a{
+	font-size: 20px;
+	color:#999;
+	text-decoration:none;
+	}
+.dangxuat a:hover{
+	color: #0099FF;
+	}
+
+.but{
+	width:100%;
+	}
+	
+.tieude{
+	background-color:#0099FF;
+	height: 40px;
+	line-height:40px;
+	margin: 30px 0px 20px 0px;
+	color:#FFFFFF;
+	font-size:24px;
+	font-weight: 400;
+	}
+.tieude p{
+	margin: 0px 0px 0px 30px;
+	}
+	
+.thongtin{
+	width: 100%;
+	min-height: 300px;
+	margin-left: 50px;
+	}
+.thongtin form p{
+	margin-bottom: 20px;
+	}
+.thongtin label{
+	width: 170px;
+	}
+.but_chucnang{
+	height: 40px;
+	width: 50%;
+	margin-left: 380px;
+	}
+.but_luu {
+	width: 80px;
+	height: 30px;
+	color: #333333;
+	border: solid #999 1px;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	margin-left: 50px;
+	margin-top: 10px;
+	padding: 0px;
+	margin-bottom: 20px;
+	}
+.but_luu:hover{
+	background-color:#E6F5FF;
+	color: #0099FF;
+	border: solid #0099CC 1px;
+	border-radius: 5px;
+	}
+	
+.dangky {
+	width: 100%;
+	min-height: 300px;
+	margin-left: 50px;
+	}
+.dangky form p{
+	margin-bottom: 20px;
+	}
+.dangky label {
+	width: 170px;
+	float: left;
+	}
+.but_xem_ds_bsy{
+	width: 200px;
+	height: 30px;
+	color: #333333;
+	border: solid #999 1px;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	padding: 0px;
+	}
+.but_xem_ds_bsy:hover{
+	background-color:#E6F5FF;
+	color: #0099FF;
+	border: solid #0099CC 1px;
+	border-radius: 5px;
+	}
+.but_datlich {
+	width: 80px;
+	height: 30px;
+	color: #333333;
+	border: solid #999 1px;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	margin-left: 30px;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	padding: 0px;
+	}
+.but_datlich:hover{
+	background-color:#E6F5FF;
+	color: #0099FF;
+	border: solid #0099CC 1px;
+	border-radius: 5px;
+	}
+.xemhoso {
+	width: 100%;
+	min-height: 500px;
+	margin-left: 50px;
+	}
+.xemhoso form p{
+	margin-bottom: 20px;
+	}
+.xemhoso label {
+	width: 170px;
+	float: left;
+	color: #333333;
+	}
+.but_kham{
+	width: 80px;
+	height: 30px;
+	color: #333333;
+	border: solid #999 1px;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	padding: 0px;
+	margin-top:40px;
+	margin-left: 85px;
+	}
+.but_kham:hover{
+	background-color:#E6F5FF;
+	color: #0099FF;
+	border: solid #0099CC 1px;
+	border-radius: 5px;
+	}
+
+.dangky_tk{
+	height: 400px;
+	background-color:#06F;
+	width:450px;
+	color:#FFF;
+	margin:auto;
+	padding:auto;
+	margin-top: 70px;
+	}
+.dangky_tk table tr th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+}
+.dangky_tk table tr td {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
+.thongtin_kb {
+	width: 100%;
+	min-height: 200px;
+	margin-left:10px;
+	margin-top: 30px;
+	}
+.thongtin_kb form p{
+	margin-bottom: 20px;
+	}
+.thongtin_kb label {
+	width: 170px;
+	float: left;
+	color: #333333;
+	}
+
+.khambenh {
+	width: 100%;
+	min-height: 300px;
+	margin-left:10px;
+	margin-top: 30px;
+	}
+.khambenh form p{
+	margin-bottom: 20px;
+	}
+.khambenh label {
+	width: 170px;
+	float: left;
+	color: #333333;
+	}
+
+.but_luuthuoc{
+	width: 80px;
+	height: 30px;
+	color: #333333;
+	border: solid #999 1px;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	padding: 0px;
+	margin-top:30px;
+	margin-left: 85px;
+	margin-bottom: 50px;
+	}
+.but_luuthuoc:hover{
+	background-color:#E6F5FF;
+	color: #0099FF;
+	border: solid #0099CC 1px;
+	border-radius: 5px;
+	}
+	
+.ngaygio {
+	width: 75%;
+	min-height: 200px;
+	margin-left:10px;
+	margin-top: 30px;
+	float:left;
+	}
+.ngaygio form p{
+	margin-bottom: 20px;
+	}
+.ngaygio label {
+	width: 170px;
+	float: left;
+	color: #333333;
+	}
+.but_gui{
+	width: 80px;
+	height: 30px;
+	color: #333333;
+	border: solid #999 1px;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	padding: 0px;
+	margin-top:220px;
+	margin-left:140px;
+	margin-bottom: 50px;
+	}
+.but_gui:hover{
+	background-color:#E6F5FF;
+	color: #0099FF;
+	border: solid #0099CC 1px;
+	border-radius: 5px;
+	}
+.but_xem{
+	width: 100px;
+	height: 30px;
+	color: #333333;
+	border: solid #999 1px;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	padding: 0px;
+	margin-top:20px;
+	margin-left:500px;
+	margin-bottom:30px;
+	}
+.but_xem:hover{
+	background-color:#E6F5FF;
+	color: #0099FF;
+	border: solid #0099CC 1px;
+	border-radius: 5px;
+	}
+	
+.ngay_ctba {
+	width: 100%;
+	min-height: 500px;
+	margin-left: 30px;
+	}
+.ngay_ctba form p{
+	margin-bottom: 20px;
+	}
+.ngay_ctba label {
+	width: 170px;
+	color: #333333;
+	}

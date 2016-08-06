@@ -1,0 +1,59 @@
+@charset "utf-8";
+/* CSS Document */
+.loichao{
+	font-weight: bold;
+	text-align:center;
+	font-size:24px;
+	color:#277BFC;
+	margin: 50px 0px;
+	}
+	
+.dangnhap{
+	padding: 5px 0px;
+	margin: 5px 0px;
+	/*background:bottom #277BFC;*/
+	min-height:160px;
+	margin: 0px 300px;
+	padding: 10px 0px; 
+	position: absolute;
+	}
+.nhap{
+	padding: 5px 0px;
+	margin: 20px 0px 5px 10px;
+	/*margin: 20px 0px 5px 30px;*/
+	position: relative;
+	}
+.ten{
+	float:left;
+	margin: 0px 20px;
+	height: 30px;
+	line-height:30px;
+	font-size:16px;
+	font-weight:bold;
+	width: 150px;
+	color:#0099FF;
+	}
+	
+.ten form {
+	float:left;
+	height: 30px;
+	margin: 20px 50px;
+	width: 100px;
+	}
+.but_dangnhap{
+	width: 100px;
+	color: #333333;
+	border:solid #999 1px;
+	border-radius: 5px;
+	background-color:#FFFFFF;
+	/*position:relative;*/
+	margin-left: 530px;
+	margin-top: 160px;
+	}
+.but_dangnhap:hover{
+	background-color:#E6F5FF;
+	color:#0099FF;
+	border:solid #0099CC 1px;
+	border-radius: 5px;
+	}
+

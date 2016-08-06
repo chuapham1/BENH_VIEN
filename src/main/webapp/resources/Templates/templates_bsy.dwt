@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>Trang Chủ</title>
+<!-- TemplateEndEditable -->
+<link href="../css/default.css" rel="stylesheet" type="text/css" />
+<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="../css/buttons.css" rel="stylesheet" type="text/css" />
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+</head>
+
+<body>
+    <header>
+    <div class="container">
+        <div class="banner">
+            <h3>Xin Chào, Bạn đã truy cập vào hệ thống thành công</h3>
+        </div><!--end banner-->
+        
+        <div class="dangxuat">
+      		<a href="#">Đăng Xuất</a>
+        </div><!---end dangxuat-->
+        	
+        <div class="col-md-12 nav">
+            <ul>
+                <li> <a href="index_Bacsy.html" class="active">Trang chủ </a></li>
+                <li><a href="BS_khambenh.html">Khám Bệnh</a></li>
+                <li><a href="BS_henlichkham.html">Hẹn Lịch Khám</a></li>
+            </ul>
+                
+            <div class="clean0"></div>
+        </div><!-- end nav--->
+    </div><!--end container--->            
+    </header>
+    <!-- TemplateBeginEditable name="noidungchinh" -->
+    <div class="container"></div>
+    <!--end container--->
+    <!-- TemplateEndEditable -->
+</body>
+</html>
