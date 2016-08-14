@@ -16,104 +16,121 @@ import javax.persistence.OneToOne;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO) //tao userid tu dong
 	private Long userid;
+	
+	//private String firstName;
 
-	private String firstName;
-
-	private String lastName;
-
+	//private String lastName;
+	
+	//private boolean gioitinh;
+	
+	//private String diachi;
+	
+	//private Long so_cmnd;
+	
+	//private long sdt;
+	
 	private String email;
 
 	private String password;
 
 	private boolean enabled;
 
-	private boolean tokenExpired;
+	//private boolean tokenExpired;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	private Set<Camera> cameras = new HashSet<Camera>(0);
-
-	public Set<Camera> getCameras() {
-		return cameras;
-	}
-
-	public void setCameras(Set<Camera> cameras) {
-		this.cameras = cameras;
-	}
+	
 
 	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Role role;
-
+	
+	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Bacsi bacsi;
+	
+	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Benhnhan benhnhan;
+	
 	public User() {
 		super();
 		this.enabled = false;
-		this.tokenExpired = false;
+		//this.tokenExpired = false;
 	}
+
+	
+
+	public Bacsi getBacsi() {
+		return bacsi;
+	}
+
+
+
+	public void setBacsi(Bacsi bacsi) {
+		this.bacsi = bacsi;
+	}
+
+
+
+	public Benhnhan getBenhnhan() {
+		return benhnhan;
+	}
+
+
+
+	public void setBenhnhan(Benhnhan benhnhan) {
+		this.benhnhan = benhnhan;
+	}
+
+
 
 	public Long getUserid() {
 		return userid;
 	}
 
+
 	public void setUserid(Long userid) {
 		this.userid = userid;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String username) {
-		this.email = username;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
+
 
 	public String getPassword() {
 		return password;
 	}
 
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
 
 	public boolean isEnabled() {
 		return enabled;
 	}
 
+
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
-	public boolean isTokenExpired() {
-		return tokenExpired;
+
+	public Role getRole() {
+		return role;
 	}
 
-	public void setTokenExpired(boolean expired) {
-		this.tokenExpired = expired;
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -140,7 +157,7 @@ public class User {
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
-		builder.append("User [firstName=").append(firstName).append("]").append("[lastName=").append(lastName)
+		builder.append("User [firstName=").append("]").append("[lastName=")
 				.append("]").append("[username").append(email).append("]");
 		return builder.toString();
 	}

@@ -55,6 +55,11 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/registration.html");
         registry.addViewController("/successRegister.html");
         registry.addViewController("/index.html");
+        registry.addViewController("/thongtinbenhnhan.html");
+        registry.addViewController("/xemhosobenhan.html");
+        //registry.addViewController("/traodoivoibacsy.html");
+        registry.addViewController("/dangkykham.html");
+        registry.addViewController("/bs_khambenh.html");
     }
 
     @Bean

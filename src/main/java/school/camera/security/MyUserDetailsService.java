@@ -14,7 +14,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import school.camera.persistence.dao.BacsiRepo;
 import school.camera.persistence.dao.UserRepository;
+import school.camera.persistence.model.Bacsi;
 import school.camera.persistence.model.User;
 import school.camera.persistence.service.IUserService;
 
@@ -24,6 +26,11 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+    
+
+    @Autowired
+    private BacsiRepo bacsiRepo;
+    
     @Autowired
     private IUserService service;
     @Autowired
@@ -43,11 +50,12 @@ public class MyUserDetailsService implements UserDetailsService {
             if (user == null) {
                 return new org.springframework.security.core.userdetails.User(" ", " ", enabled, true, true, true, getAuthorities(new Integer(1)));
             }
-
             return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), user.isEnabled(), accountNonExpired, credentialsNonExpired, accountNonLocked, getAuthorities(user.getRole().getRole()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        
+        
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(Integer role) {

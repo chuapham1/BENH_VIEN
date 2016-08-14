@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import school.camera.hashing.HashGenerator;
 import school.camera.persistence.dao.UserRepository;
-import school.camera.persistence.dao.VerificationTokenRepository;
+//import school.camera.persistence.dao.VerificationTokenRepository;
 import school.camera.persistence.model.Role;
 import school.camera.persistence.model.User;
-import school.camera.persistence.model.VerificationToken;
+//import school.camera.persistence.model.VerificationToken;
 import school.camera.validation.service.EmailExistsException;
 
 @Service
@@ -19,8 +19,8 @@ public class UserService implements IUserService {
     @Autowired
     private UserRepository repository;
 
-    @Autowired
-    private VerificationTokenRepository tokenRepository;
+//    @Autowired
+//    private VerificationTokenRepository tokenRepository;
 
     @Autowired
     private HashGenerator hashGenerator;
@@ -31,25 +31,25 @@ public class UserService implements IUserService {
             throw new EmailExistsException("There is an account with that email adress: " + accountDto.getEmail());
         }
         User user = new User();
-        user.setFirstName(accountDto.getHo());
-        user.setLastName(accountDto.getTen());
+       // user.setFirstName(accountDto.getHo());
+       // user.setLastName(accountDto.getTen());
         String hashedPassword = hashGenerator.getHashedPassword(accountDto.getPassword());
         user.setPassword(hashedPassword);
         user.setEmail(accountDto.getEmail());
         user.setRole(new Role(Integer.valueOf(1), user));
         return repository.save(user);
     }
+//
+//    @Override
+//    public User getUser(String verificationToken) {
+//        User user = tokenRepository.findByToken(verificationToken).getUser();
+//        return user;
+//    }
 
-    @Override
-    public User getUser(String verificationToken) {
-        User user = tokenRepository.findByToken(verificationToken).getUser();
-        return user;
-    }
-
-    @Override
-    public VerificationToken getVerificationToken(String VerificationToken) {
-        return tokenRepository.findByToken(VerificationToken);
-    }
+//    @Override
+//    public VerificationToken getVerificationToken(String VerificationToken) {
+//        return tokenRepository.findByToken(VerificationToken);
+//    }
 
     @Override
     public void saveRegisteredUser(User user) {
@@ -60,12 +60,12 @@ public class UserService implements IUserService {
     public void deleteUser(User user) {
         repository.delete(user);
     }
-
-    @Override
-    public void createVerificationTokenForUser(User user, String token) {
-        VerificationToken myToken = new VerificationToken(token, user);
-        tokenRepository.save(myToken);
-    }
+//
+//    @Override
+//    public void createVerificationTokenForUser(User user, String token) {
+//        VerificationToken myToken = new VerificationToken(token, user);
+//        tokenRepository.save(myToken);
+//    }
 
     private boolean emailExist(String email) {
         User user = repository.findByEmail(email);

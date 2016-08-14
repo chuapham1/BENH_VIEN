@@ -23,28 +23,30 @@
     </header>
     
    	<div class="container">
+   	<form action="j_spring_security_check"  method="post" id="loginform" class="form-signin">
         <div class="col-lg-6 dangnhap">
         	<div class="nhap">
                 <div class="ten">Tên Đăng Nhập: </div> 
-                <form action="#">
-                    <input name="username" type="text" value="" size="30" maxlength="20"/>
-                </form>
+             
+                <input  type='text' name='j_username' value=''  placeholder="Tên Đăng Nhập:">
+                   <!--  <input name="username" type="text" value="" size="30" maxlength="20"/> -->
+                
             </div><!--end nhap-->
             
             <div class="clean0"></div>
             
             <div class="nhap">
                 <div class="ten">Mật khẩu: </div> 
-                <form action="#">
-                    <input name="username" type="password" value="" size="30" maxlength="30"/>
-                </form>
+             
+               <input  type='password' name='j_password'  placeholder="Mật khẩu:">                 
+              
             </div><!--end nhap-->
             
-            <!--<p style="color:#FF0000; margin-left: 20px">** Tên đăng nhập và Mật khẩu là số CMND của bạn</p>-->
         </div><!--end dangnhap-->
         
-        <button type="button" name="" value="" class="but_dangnhap" data-text="Đăng Nhập"><span>Đăng Nhập</span>
+        <button type="submit" name="" value="" class="but_dangnhap" data-text="Đăng Nhập"><span>Đăng Nhập</span>
         </button>
+        </form>
         <p style ="margin-left: 500px; margin-top: 30px;"> Đăng ký <a href = "<c:url value="/user/registration" />">tại đây</a> nếu bạn chưa có tài khoản</p>
     </div><!--end container-->
 </body>

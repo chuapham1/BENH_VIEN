@@ -25,6 +25,11 @@
 		<intercept-url pattern="/test*" access="isAuthenticated()" />
 		<intercept-url pattern="/saveCamera*" access="isAuthenticated()" />
 		<intercept-url pattern="/setting*" access="isAuthenticated()" />
+		<intercept-url pattern="/thongtinbenhnhan*" access="isAuthenticated()" />
+		<intercept-url pattern="/xemhosobenhan*" access="isAuthenticated()" />
+		<intercept-url pattern="/dangkykham*" access="isAuthenticated()" />
+		<intercept-url pattern="/bs_khambenh*" access="isAuthenticated()" />
+		
 	<intercept-url pattern="/*" access="permitAll" />
 		<form-login login-page='/login.html'
 			authentication-failure-url="/login.html?error=true"

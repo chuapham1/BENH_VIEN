@@ -19,9 +19,9 @@ public class Role {
     private Long id;
 
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id") //column cua bang role trong db ma no chua cai userid cua user
     private User user;
-
+    
     private Integer role;
 
     public Role() {
@@ -38,8 +38,9 @@ public class Role {
         this.role = role;
         this.user = user;
     }
+    
 
-    public Long getId() {
+	public Long getId() {
         return id;
     }
 

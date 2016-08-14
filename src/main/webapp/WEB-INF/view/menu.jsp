@@ -1,87 +1,92 @@
+
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
-	<title>Embedding IP Camera Live Video Stream in web page</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="keywords" content="ip camera, network camera, embed ip camera, embed ip camera into webpage, embed ip camera stream in web page, embed network camera on website">
-	<meta name="description" content="Video streaming solution for embedding your IP camera live video stream in web page.">
-	<meta name="author" content="">	
-	
-	<link href="<c:url value="/resources/dashboard/bootstrap.min.css"/>" rel="stylesheet">
-	<link href="<c:url value="/resources/dashboard/bootstrap.css"/>" rel="stylesheet">
-	<!-- <link href="./css/bootstrap.min.css" rel="stylesheet"> -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-	<script src="<c:url value="/resources/dashboard/jquery-1.11.2.min.js"/>"></script>
-	<script src="<c:url value="/resources/dashboard/bootstrap.min.js"/>"></script>
-	<script src="<c:url value="/resources/dashboard/script.js"/>"></script>
-	<script src="<c:url value="/resources/dashboard/jquery.datetimepicker.js"/>"></script>
-	<script src="<c:url value="/resources/dashboard/jquery.validate.min.js"/>"></script>
-	<!-- <script src="./setting_files/jquery.datetimepicker.js"></script> -->
-		<!-- <link href="./setting_files/bootstrap.css" rel="stylesheet"> -->
-		<!-- <link href="./setting_files/jquery.datetimepicker.css" rel="stylesheet"> -->
-		<!-- <script src="./setting_files/jquery.validate.min.js"></script> -->
-		<!-- <link href="./setting_files/jquery.validate.css" rel="stylesheet"> -->
-		<link href="<c:url value="/resources/dashboard/jquery.validate.css"/>" rel="stylesheet">
-	<link href="<c:url value="/resources/dashboard/jquery.datetimepicker.css"/>" rel="stylesheet">
-	<link href="<c:url value="/resources/dashboard/jquery-ui-1.10.0.custom.min.css"/>" rel="stylesheet">
-	<link href="<c:url value="/resources/dashboard/skin.css"/>" rel="stylesheet">
-	
-	<!-- <script src="./js/jquery-1.11.2.min.js"></script>
-	<script src="./js/bootstrap.min.js"></script>
-	<script src="./js/script.js"></script>
-	<link href="./css/jquery-ui-1.10.0.custom.min.css" rel="stylesheet">
-	<link href="./css/skin.css" rel="stylesheet"> -->
+<html>
+<head>
+<meta charset="utf-8">
+<title>Trang Chủ</title>
+<link href="<c:url value="/resources/css/bootstrap.css"/>" rel="stylesheet">
+
+<link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet">
+
+
+<link href="<c:url value="/resources/css/normalize.css"/>" rel="stylesheet">
+
+<link href="<c:url value="/resources/css/vicons.css"/>" rel="stylesheet">
+
+<link href="<c:url value="/resources/css/buttons.css"/>" rel="stylesheet">
+
+
+
+<link href="<c:url value="/resources/SpryAssets/SpryValidationCheckbox.css"/>" rel="stylesheet" type="text/css" > 
+
+<link href="<c:url value="/resources/SpryAssets/SpryValidationTextField.css"/>" rel="stylesheet" type="text/css">
+
+
+<link href="<c:url value="/resources/SpryAssets/SpryValidationSelect.css"/>" rel="stylesheet" type="text/css" >
+
+<link href="<c:url value="/resources/css/vicons-font.css"/>" rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/buttons.css"/>" rel="stylesheet" type="text/css">
+
+<link href="<c:url value="/resources/SpryAssets/SpryValidationCheckbox.css"/>" rel="stylesheet" type="text/css" > 
+<link href="<c:url value="/resources/SpryAssets/SpryValidationTextField.css"/>" rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/SpryAssets/SpryValidationSelect.css"/>" rel="stylesheet" type="text/css" >
+<link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet" type="text/css" >
+<link href="<c:url value="/resources/css/bootstrap.css"/>" rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/normalize.css"/>" rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/vicons-font.css"/>" rel="stylesheet" type="text/css">
+<link href="<c:url value="/resources/css/buttons.css"/>" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
+<header>
 <div class="container">
-	<!-- Static navbar -->
-	<nav class="navbar navbar-inverse navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<div class="menutext">MENU</div>
-				</button> 
-				<a class="navbar-brand" href="<c:url value="/homepage" />"><img src="<c:url value="/resources/dashboard/index-logo.png"/>" alt="cameraserver"></a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-						<li class=""><a href="<c:url value="/homepage" />">Dashboard</a></li>
-						<li><a href="<c:url value="/cameras" />">Camera</a></li>
-						<li><a href="<c:url value="/videos" />">Images</a></li>
-						<li><a href="<c:url value="/images" />">Videos</a></li>		
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="/userprofile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">hoc duong <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="<c:url value="/Profile" />">Profile</a></li>	
-							<li><a href="<c:url value="/changepassword" />">Changepassword</a></li>	
-							<li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>	
-						</ul>
-					</li>
-				</ul>
-			</div>
-			<!--/.nav-collapse -->
-		</div><!--/.container-fluid -->
-	</nav>
-	
-</div>
+	<div class="banner">
+    	<h3>Chào mừng bạn đến với hệ thống quản lý bệnh viện</h3>
+    </div><!--banner-->
+    
+    <div class="col-md-12 nav">
+      <ul>
+        <li> <a href="index_Benhnhan.html" class="active">Trang chủ </a></li>
+        <li><a href="#">Giới thiệu</a></li>
+        <li><a href="#"> Liên hệ </a></li>
+        <li> <a href="#">Góp ý</a></li>
+      </ul>
+    </div><!-- end nav--->
+</div><!-- end container-->
+</header>
 
-</body>
-</html>
+<div class="clean0"></div>
+<br/>
+<div class="container">
+
+	<!--Thong tin benh nhan-->
+	<div class="but">
+    	<a href="<c:url value="/thongtinbenhnhan" />">
+        <button type="button" name="" value="" class="col-md-3 button--winona button--border-thin button--round-s" data-text="Thông tin bệnh  nhân"><span>Thông tin bệnh nhân</span>
+        </button> </a>
+    
+    <!--Dang ky kham truc tuyen-->
+		<a href="<c:url value="/dangkykham" />">
+        <button type="button" name="" value="" class="col-md-3 button--winona button--border-thin button--round-s" data-text="Đăng ký khám trực tuyến"><span>Đăng ký khám trực tuyến</span>
+        </button></a>
+ 
+     
+     <!--Xem ho so benh an-->
+     	<a href="<c:url value="/xemhosobenhan" />">
+        <button type="button" name="" value="" class="col-md-3 button--winona button--border-thin button--round-s" data-text="Xem hồ sơ bệnh án"><span>Xem hồ sơ bệnh án</span>
+        </button></a>
+     
+     <!--Trao doi voi bac sy-->
+     	<a href="<c:url value="/traodoivoibacsy" />">
+        <button type="button" name="" value="" class="col-md-3 button--winona button--border-thin button--round-s" data-text="Trao đổi với bác sỹ"><span>Trao đổi với bác sỹ</span>
+        </button></a>
+     </div><!--end but-->
+</div><!--container-->

@@ -14,7 +14,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Configuration
 @ComponentScan(basePackages = { "school.camera.event.service", "school.camera.event", "school.camera.persistence.service", "school.camera.persistence.dao" })
-@Import({ MvcConfig.class, PersistenceJPAConfig.class, SecSecurityConfig.class, QuartzConfiguration.class })
+@Import({ MvcConfig.class, PersistenceJPAConfig.class, SecSecurityConfig.class})
 @PropertySource("classpath:application.properties")
 public class AppConfig {
     @Autowired

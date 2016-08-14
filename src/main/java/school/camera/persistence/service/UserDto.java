@@ -9,6 +9,8 @@ import school.camera.validation.service.ValidEmail;
 
 @PasswordMatches
 public class UserDto {
+	
+	private Long userId;
     @NotNull
     @NotEmpty
     private String ho;
@@ -30,9 +32,66 @@ public class UserDto {
     @NotEmpty
     private String rePassword;
 
+    private boolean gioitinh;
+    
+    private String diachi;
+	
+	private String so_cmnd;
+	
+	private long sdt;
+	
+	private String ngaysinh;
+	
+	
+    public Long getUserId() {
+		return userId;
+	}
 
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
-    public String getEmail() {
+	public boolean isGioitinh() {
+		return gioitinh;
+	}
+
+	public void setGioitinh(boolean gioitinh) {
+		this.gioitinh = gioitinh;
+	}
+
+	public String getDiachi() {
+		return diachi;
+	}
+
+	public void setDiachi(String diachi) {
+		this.diachi = diachi;
+	}
+
+	public String getSo_cmnd() {
+		return so_cmnd;
+	}
+
+	public void setSo_cmnd(String so_cmnd) {
+		this.so_cmnd = so_cmnd;
+	}
+
+	public long getSdt() {
+		return sdt;
+	}
+
+	public void setSdt(long sdt) {
+		this.sdt = sdt;
+	}
+
+	public String getNgaysinh() {
+		return ngaysinh;
+	}
+
+	public void setNgaysinh(String ngaysinh) {
+		this.ngaysinh = ngaysinh;
+	}
+
+	public String getEmail() {
         return email;
     }
 
