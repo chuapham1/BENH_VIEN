@@ -69,6 +69,8 @@ public class MyUserDetailsService implements UserDetailsService {
             roles.add("ROLE_ADMIN");
         } else if (role.intValue() == 1) {
             roles.add("ROLE_USER");
+        }  else if (role.intValue() == 3) {
+            roles.add("ROLE_BACSI");
         }
         return roles;
     }

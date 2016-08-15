@@ -1,9 +1,12 @@
 package school.camera.web.controller;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -25,9 +28,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 //import school.camera.event.OnRegistrationCompleteEvent;
 import school.camera.hashing.HashGenerator;
+import school.camera.persistence.dao.BenhnhanRepo;
 import school.camera.persistence.dao.UserRepository;
+import school.camera.persistence.model.Bacsi;
+import school.camera.persistence.model.Benhnhan;
 import school.camera.persistence.model.Role;
 import school.camera.persistence.model.User;
+import school.camera.persistence.service.BenhNhanDto;
 import school.camera.persistence.service.IUserService;
 import school.camera.persistence.service.UserDto;
 import school.camera.validation.service.EmailExistsException;
@@ -52,6 +59,9 @@ public class RegistrationController {
     @Autowired
     private HashGenerator hashGenerator;
     
+    @Autowired
+	private BenhnhanRepo benhnhanRepo;
+    
 	/*
 	 * @Autowired private ApplicationEventPublisher eventPublisher;
 	 */
@@ -65,6 +75,55 @@ public class RegistrationController {
 		return "index";
 	}
 
+
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String showAdmin(WebRequest request, Model model) {
+		LOGGER.debug("Rendering registration page.");
+		UserDto accountDto = new UserDto();
+		model.addAttribute("user", accountDto);
+		return "admin";
+	}
+	
+	@RequestMapping(value = "/admin", method = RequestMethod.POST)
+	public ModelAndView createBacsi(@ModelAttribute("user") @Valid UserDto accountDto, BindingResult result,
+			WebRequest request, Errors errors) throws EmailExistsException {
+		LOGGER.info("Registering user bac si account with information: {}", accountDto);
+		if (result.hasErrors()) {
+			LOGGER.info("result.hasErrors");
+			return new ModelAndView("admin", "user", accountDto);
+		}
+
+		User registered = createBacsiAccount(accountDto);
+		if (registered == null) {
+			result.rejectValue("email", "message.regError");
+			return new ModelAndView("emailError", "user", accountDto);
+		}
+		LOGGER.info("thanh cong");
+		return new ModelAndView("admin", "user", accountDto);
+	}
+	public User createBacsiAccount(UserDto accountDto) throws EmailExistsException {
+		if (emailExist(accountDto.getEmail())) {
+			throw new EmailExistsException("There is an account with that email adress: " + accountDto.getEmail());
+		}
+		User user = new User();
+		
+		user.setEmail(accountDto.getEmail());
+		user.setEnabled(true);
+		user.setRole(new Role(Integer.valueOf(3), user));
+		String hashedPassword = hashGenerator.getHashedPassword(accountDto.getPassword());
+        user.setPassword(hashedPassword);
+        
+        Bacsi bacsi = new Bacsi();
+		bacsi.setDiachi(accountDto.getDiachi());
+		bacsi.setHo(accountDto.getHo());		
+		bacsi.setSdt(accountDto.getSdt());
+		bacsi.setTen(accountDto.getTen());		
+		bacsi.setUser(user);	
+		
+		user.setBacsi(bacsi);    
+		return repository.save(user);
+	}
+	
 	@RequestMapping(value = "/user/registration", method = RequestMethod.GET)
 	public String showRegistrationForm(WebRequest request, Model model) {
 		LOGGER.debug("Rendering registration page.");
@@ -86,6 +145,7 @@ public class RegistrationController {
 			result.rejectValue("email", "message.regError");
 			return new ModelAndView("emailError", "user", accountDto);
 		}
+		
 		return new ModelAndView("successRegister", "user", accountDto);
 	}
 
@@ -103,10 +163,17 @@ public class RegistrationController {
 		user.setRole(new Role(Integer.valueOf(1), user));
 		String hashedPassword = hashGenerator.getHashedPassword(accountDto.getPassword());
         user.setPassword(hashedPassword);
-       /* user.setDiachi(" ");
-        user.setGioitinh(true);
-        user.setSdt(0);
-        user.setSo_cmnd((long) 0);*/
+        Benhnhan benhNhan = new Benhnhan();
+		benhNhan.setDiachi(" ");
+		benhNhan.setHo(accountDto.getHo());
+		benhNhan.setNgaysinh(new Date());
+		benhNhan.setSdt(0);
+		benhNhan.setTen(accountDto.getTen());
+		benhNhan.setSo_cmnd(0);
+		benhNhan.setUser(user);
+		benhNhan.setGioitinh(true);
+		user.setBenhnhan(benhNhan);
+		//benhnhanRepo.save(benhNhan);
     
 		return repository.save(user);
 	}

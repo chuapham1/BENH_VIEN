@@ -25,15 +25,26 @@ public class Benhnhan {
 	
 	private long sdt;
 	
+	private boolean gioitinh;
+	
 	private Date ngaysinh;
 	
-	private String so_cmnd;
+	private long so_cmnd;
 
 	 @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	 @JoinColumn(name = "user_id") //column cua bang role trong db ma no chua cai userid cua user
 	 private User user;
 	 
 	 
+	 
+	public boolean isGioitinh() {
+		return gioitinh;
+	}
+
+	public void setGioitinh(boolean gioitinh) {
+		this.gioitinh = gioitinh;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -90,13 +101,15 @@ public class Benhnhan {
 		this.ngaysinh = ngaysinh;
 	}
 
-	public String getSo_cmnd() {
+	public long getSo_cmnd() {
 		return so_cmnd;
 	}
 
-	public void setSo_cmnd(String so_cmnd) {
+	public void setSo_cmnd(long so_cmnd) {
 		this.so_cmnd = so_cmnd;
 	}
+
+	
 	
 	
 }
