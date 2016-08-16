@@ -123,13 +123,7 @@
             
             <!--Button luu-->
             <input type="submit" value="Lưu" class="but_luu" />
-           <!--  <button type="button" name="" value="" class="but_luu" data-text="Lưu"><span>Lưu</span>
-            </button> -->
-            <!-- end button luu-->
-            
-            <!--Button huy-->
-            
-            <!-- end button huy-->
+         
         </div><!--end button chuc nang-->
    </form:form> <!--end form thong tin--> 
   </div><!--end thongtin-->

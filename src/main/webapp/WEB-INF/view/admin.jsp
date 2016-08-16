@@ -40,11 +40,10 @@
     <form:form modelAttribute="user" method="post" id="registerform" class="form-signin" novalidate="novalidate"  enctype="utf8">
     <div class="thongtin_kb">
         <!---------------- MA BAC SY ----------------->
-         <p>
+		<p>
           <label for="mabacsy">Email Bác Sỹ: </label>
-           <form:input path="email" value=""  size="30"  type="text"  name="ho" placeholder="Nhập email"/>
-        
-        </p> 
+          <form:input path="email" value=""  size="30"  type="text"  name="ho" placeholder="Nhập email"/>        
+		</p>
         
         <!---------------- MA BAC SY ----------------->
          <p>
@@ -53,11 +52,10 @@
          
         </p> 
         
-          <p>
-          <label for="mabacsy">RePassword: </label>
-           <form:input path="rePassword" value=""  size="30"  type="text"  name="ho" placeholder="Nhập lai mat khau"/>
-         
-        </p> 
+		<p>
+			<label for="mabacsy">RePassword: </label>
+			<form:input path="rePassword" value=""  size="30"  type="text"  name="ho" placeholder="Nhập lai mat khau"/>
+		</p> 
         
         <!---------------- HO BAC SY ----------------->
         <p>

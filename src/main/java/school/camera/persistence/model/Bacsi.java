@@ -18,7 +18,7 @@ public class Bacsi {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long bacsy_id;
+	private Long bacsiId;
 	
 	private String ho;
 
@@ -29,9 +29,11 @@ public class Bacsi {
 	private long sdt;
 
 	@OneToOne(targetEntity = User.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id") //column cua bang role trong db ma no chua cai userid cua user
+	@JoinColumn(name = "user_id")
 	private User user;
 	 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bacsi")
+	private Set<DKKham> DKKhams = new HashSet<DKKham>(0);
 	
 	public User getUser() {
 		return user;
@@ -41,12 +43,21 @@ public class Bacsi {
 		this.user = user;
 	}
 
-	public Long getBacsy_id() {
-		return bacsy_id;
+	
+	public Long getBacsiId() {
+		return bacsiId;
 	}
 
-	public void setBacsy_id(Long bacsy_id) {
-		this.bacsy_id = bacsy_id;
+	public void setBacsiId(Long bacsiId) {
+		this.bacsiId = bacsiId;
+	}
+
+	public Set<DKKham> getDKKhams() {
+		return DKKhams;
+	}
+
+	public void setDKKhams(Set<DKKham> dKKhams) {
+		DKKhams = dKKhams;
 	}
 
 	public String getHo() {

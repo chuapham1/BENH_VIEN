@@ -120,6 +120,7 @@ public class RegistrationController {
 		bacsi.setTen(accountDto.getTen());		
 		bacsi.setUser(user);	
 		
+		////?????
 		user.setBacsi(bacsi);    
 		return repository.save(user);
 	}
@@ -163,6 +164,7 @@ public class RegistrationController {
 		user.setRole(new Role(Integer.valueOf(1), user));
 		String hashedPassword = hashGenerator.getHashedPassword(accountDto.getPassword());
         user.setPassword(hashedPassword);
+        
         Benhnhan benhNhan = new Benhnhan();
 		benhNhan.setDiachi(" ");
 		benhNhan.setHo(accountDto.getHo());
@@ -172,6 +174,8 @@ public class RegistrationController {
 		benhNhan.setSo_cmnd(0);
 		benhNhan.setUser(user);
 		benhNhan.setGioitinh(true);
+		
+		///??????
 		user.setBenhnhan(benhNhan);
 		//benhnhanRepo.save(benhNhan);
     

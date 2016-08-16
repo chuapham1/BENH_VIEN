@@ -1,6 +1,8 @@
 package school.camera.persistence.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -32,11 +35,21 @@ public class Benhnhan {
 	private long so_cmnd;
 
 	 @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	 @JoinColumn(name = "user_id") //column cua bang role trong db ma no chua cai userid cua user
+	 @JoinColumn(name = "user_id") //column cua bang bn trong db ma no chua cai userid cua user
 	 private User user;
 	 
+	 @OneToMany(fetch = FetchType.LAZY, mappedBy = "benhnhan")
+	 private Set<DKKham> DKKhams = new HashSet<DKKham>(0);
 	 
-	 
+	
+	public Set<DKKham> getDKKhams() {
+		return DKKhams;
+	}
+
+	public void setDKKhams(Set<DKKham> dKKhams) {
+		DKKhams = dKKhams;
+	}
+
 	public boolean isGioitinh() {
 		return gioitinh;
 	}
