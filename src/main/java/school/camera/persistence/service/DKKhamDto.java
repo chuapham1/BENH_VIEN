@@ -1,11 +1,12 @@
 package school.camera.persistence.service;
 
 public class DKKhamDto {
-Long maBenhNhan;
-String ngayKham;
-String gioKham;
-String trieuChung;
-Long bacsiId;
+	Long maBenhNhan;
+	String ngayKham;
+	String gioKham;
+	String trieuChung;
+	Long bacsiId;
+	
 public Long getMaBenhNhan() {
 	return maBenhNhan;
 }

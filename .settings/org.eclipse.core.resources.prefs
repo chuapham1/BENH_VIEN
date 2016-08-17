@@ -4,6 +4,7 @@ encoding//src/main/resources=UTF-8
 encoding//src/main/webapp/WEB-INF/view/bs_khambenh.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/view/dangkykham.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/view/index.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/view/khambenh.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/view/login.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/view/successRegister.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/view/thongtinbenhnhan.jsp=UTF-8

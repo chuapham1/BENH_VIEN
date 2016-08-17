@@ -18,7 +18,7 @@ import javax.persistence.OneToOne;
 public class Benhnhan {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long benhnhan_id;
+	private Long benhnhanId;
 	
 	private String ho;
 
@@ -32,16 +32,27 @@ public class Benhnhan {
 	
 	private Date ngaysinh;
 	
-	private long so_cmnd;
+	private long soCmnd;
 
 	 @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	 @JoinColumn(name = "user_id") //column cua bang bn trong db ma no chua cai userid cua user
 	 private User user;
 	 
-	 @OneToMany(fetch = FetchType.LAZY, mappedBy = "benhnhan")
+	 @OneToMany(fetch = FetchType.EAGER , mappedBy = "benhnhan")
 	 private Set<DKKham> DKKhams = new HashSet<DKKham>(0);
 	 
+	 @OneToMany(fetch = FetchType.EAGER , mappedBy = "benhnhan")
+	 private Set<BenhAn> benhAns = new HashSet<BenhAn>(0);
 	
+	 
+	public Set<BenhAn> getBenhAns() {
+		return benhAns;
+	}
+
+	public void setBenhAns(Set<BenhAn> benhAns) {
+		this.benhAns = benhAns;
+	}
+
 	public Set<DKKham> getDKKhams() {
 		return DKKhams;
 	}
@@ -67,11 +78,11 @@ public class Benhnhan {
 	}
 
 	public Long getBenhnhan_id() {
-		return benhnhan_id;
+		return benhnhanId;
 	}
 
 	public void setBenhnhan_id(Long benhnhan_id) {
-		this.benhnhan_id = benhnhan_id;
+		this.benhnhanId = benhnhan_id;
 	}
 
 	public String getHo() {
@@ -115,11 +126,11 @@ public class Benhnhan {
 	}
 
 	public long getSo_cmnd() {
-		return so_cmnd;
+		return soCmnd;
 	}
 
 	public void setSo_cmnd(long so_cmnd) {
-		this.so_cmnd = so_cmnd;
+		this.soCmnd = so_cmnd;
 	}
 
 	

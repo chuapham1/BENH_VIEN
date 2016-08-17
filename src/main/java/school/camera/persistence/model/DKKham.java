@@ -15,13 +15,13 @@ public class DKKham {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long ma_dang_ky;
+	private Long maDangKy;
 	
-	Date ngay_dang_ky;
+	Date ngayDangKy;
 	
-	String trieu_chung;
+	String trieuChung;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "benhnhan_id", nullable = false)
 	private Benhnhan benhnhan;
 	
@@ -30,27 +30,27 @@ public class DKKham {
 	private Bacsi bacsi ;
 
 	public Long getMa_dang_ky() {
-		return ma_dang_ky;
+		return maDangKy;
 	}
 
 	public void setMa_dang_ky(Long ma_dang_ky) {
-		this.ma_dang_ky = ma_dang_ky;
+		this.maDangKy = ma_dang_ky;
 	}
 
 	public Date getNgay_dang_ky() {
-		return ngay_dang_ky;
+		return ngayDangKy;
 	}
 
 	public void setNgay_dang_ky(Date ngay_dang_ky) {
-		this.ngay_dang_ky = ngay_dang_ky;
+		this.ngayDangKy = ngay_dang_ky;
 	}
 
 	public String getTrieu_chung() {
-		return trieu_chung;
+		return trieuChung;
 	}
 
 	public void setTrieu_chung(String trieu_chung) {
-		this.trieu_chung = trieu_chung;
+		this.trieuChung = trieu_chung;
 	}
 
 	public Benhnhan getBenhnhan() {

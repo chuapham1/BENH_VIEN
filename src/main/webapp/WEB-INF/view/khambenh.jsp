@@ -7,7 +7,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/templates_bsy.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
@@ -52,27 +52,7 @@
     		<p> Khám Bệnh </p>
    	  </div>
     
-    <div style="height:150px; width: 70%;overflow:auto; float:left;">
-		<table width="100%" border="1">
-        	<tr>
-            	<th width="16%">STT</th>
-                <th width="29%">Mã Bệnh Nhân</th>
-                <th width="24%">Họ</th>
-                <th width="31%">Tên</th>
-                <th width="29%">Kham</th>
-            </tr>
-            <c:forEach items="${benhNhans}" var="benhnhan" varStatus="status">  
-            <tr>
-            	<td>${status.index + 1}</td> 
-                 <td>${benhnhan.benhnhan_id}</td> 
-                <td>${benhnhan.ho}</td>
-                <td>${benhnhan.ten}</td> 
-                <td><a href="<c:url value="/khambenh/${benhnhan.benhnhan_id}" />" >kham</a></td>
-            </tr>
-            </c:forEach>
-            
-        </table>
-	</div><!---end div table---> 
+    
     
     
     <div class="clean0"></div>  
@@ -82,19 +62,20 @@
           	<!------------ FORM MA BENH NHAN ----------------->
             <p>
               <label for="mabenhnhan">Mã Bệnh Nhân:</label>
-              <input type="text" name="mabenhnhan" id="mabenhnhan" size="30" maxlength="11" />
+              <input value="${khamBenh.benhnhan_id}" type="text" name="mabenhnhan" id="mabenhnhan" size="30" maxlength="11"  readonly="readonly"/>
             </p>
             
             <!------------ FORM HO TEN BENH NHAN ----------------->
             <p>
               <label for="hoten">Họ Tên Bệnh Nhân:</label>
-              <input type="text" name="hoten" id="hoten"  size="40" readonly="readonly"/>
+              <input value="${khamBenh.ho} ${khamBenh.ten}"  type="text" name="hoten" id="hoten"  size="40" readonly="readonly"/>
             </p>
             
             <!------------ FORM TRIEU CHUNG ----------------->
             <p>
               <label for="trieuchung">Triệu Chứng:</label>
-              <textarea name="trieuchung" cols="80" rows="5" id="trieuchung" readonly="readonly"></textarea>
+             
+              <input value="${khamBenh.trieuchung}" name="trieuchung" id="trieuchung"  readonly="readonly" />
             </p>
           </form>
       </div><!---end thongtin_kb--->
@@ -102,45 +83,45 @@
       <div class="clean0"></div>
       	
       <div class="khambenh">
-      	<form id="khambenh" name="khambenh" method="post" action="">
+      	<form:form modelAttribute="khamBenh" method="POST"  enctype="utf8">
         	
             <!------------ FORM NGAY KHAM ----------------->
             <p>
               <label for="ngaykham">Ngày khám: </label>
-              <input type="date" name="ngaykham" id="ngaykham" size="30" maxlength="20" readonly="readonly"/>
+              <form:input path="ngayKham" name="ngaykham" id="ngaykham" size="30" maxlength="20" />
             </p>
         	
             <!------------ FORM MO TA ----------------->
             <p>
               <label for="mota">Mô tả bệnh: </label>
-              <input type="text" name="mota" id="mota" size="75" maxlength="200" />
+               <form:input path="moTaBenh" name="ngaykham" id="ngaykham" size="75" maxlength="200" />
+             
             </p>
             
        	  <!------------ FORM CHAN DOAN ----------------->
             <p>
               <label for="chandoan">Chẩn đoán: </label>
-              <input type="text" name="chandoan" id="chandoan" size="75" maxlength="100" />
+               <form:input path="chuanDoan" name="ngaykham" id="ngaykham" size="75" maxlength="200" />
             </p>
             
             <!------------ FORM NOI/NGOAI TRU ----------------->
             <p>
                 <label for="loaidieutri">Loại Điều Trị: </label>
-                <select name="loaidieutri" id="loaidieutri" >
-                  <option value="#">Ngoại Trú</option>
-                    <option value="#">Nội Trú</option>
-                </select>
+                <form:checkbox path="loaiDieuTri" />
             </p>
             
-            <!------------ FORM NGAY NHAP VIEN ----------------->
+            <!------------ FORM NGAY XUAT VIEN ----------------->
           	<p>
-              <label for="ngaynhapvien">Ngày khám: </label>
-              <input type="date" name="ngaynhapvien" id="ngaynhapvien" size="30" maxlength="20" readonly="readonly"/>
+              <label for="ngaynhapvien">Ngày Xuất viện: </label>
+               <form:input path="chuanDoan" name="ngaykham" id="ngaykham" size="30" maxlength="20" />
+             
             </p>
             
             <!------------ FORM DAN DO ----------------->
   	  	  <p>
             <label for="dando">Dặn dò: </label>
-            <input type="text" name="dando" id="dando" size="75" maxlength="100" readonly="readonly"/>
+              <form:input path="danDo" name="ngaykham" id="ngaykham" size="75" maxlength="100" />
+           
           </p>
             
        	  <p style="font-size:20px; font-weight:bold; color:#009">TOA THUỐC</p>
@@ -163,20 +144,12 @@
             
             <!------------ FORM CACH DUNG ----------------->
           <p>
-                <label for="cachdung">Cách Dùng: </label>
-                <select name="cachdung" id="cachdung" >
-                  <option value="#">Uống</option>
-                  <option value="#">Dùng ngoài da</option>
-                  <option value="#">Ngậm</option>
-                </select>
+                <label for="cachdung">Số Lượng: </label>
+                <input type="text"  size="50" maxlength="100"/>
             </p>
             
-            <!------------ FORM DAN DO ----------------->
-  	  	  	<p>
-            <label for="dando">Dặn Dò: </label>
-            <input type="text" name="dando" id="dando" size="75" maxlength="100"/>
-  	  	  	</p>
-      	</form>
+         
+      	 </form:form>
         <button type="button" name="" value="" class="but_luuthuoc" data-text="Lưu"><span>Lưu</span></button>
       </div><!----- end khambenh --->
     </div><!---end container-->

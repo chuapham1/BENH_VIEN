@@ -6,5 +6,6 @@ import school.camera.persistence.model.Benhnhan;
 import school.camera.persistence.model.User;
 
 public interface BenhnhanRepo extends JpaRepository<Benhnhan, Long> {
-	public  Benhnhan findByUser(User user);
+	public  Benhnhan findByUser(User user); 
+	public  Benhnhan findByBenhnhanId(Long benhnhanId);
 }

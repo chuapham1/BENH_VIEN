@@ -35,6 +35,18 @@ public class Bacsi {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bacsi")
 	private Set<DKKham> DKKhams = new HashSet<DKKham>(0);
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bacsi")
+	private Set<BenhAn> benhAns = new HashSet<BenhAn>(0);
+	
+	
+	public Set<BenhAn> getBenhAns() {
+		return benhAns;
+	}
+
+	public void setBenhAns(Set<BenhAn> benhAns) {
+		this.benhAns = benhAns;
+	}
+
 	public User getUser() {
 		return user;
 	}

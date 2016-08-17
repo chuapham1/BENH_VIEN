@@ -80,8 +80,11 @@ public class BenhNhanController {
 		LOGGER.debug("Rendering thongtinbenhnhan page.");
 		String email = (String) session.getAttribute("email");
 		LOGGER.info("username {}", email);
+		
 		User user = repository.findByEmail(email);
-		Benhnhan benhNhan = benhnhanRepo.findByUser(user);		
+		
+		Benhnhan benhNhan = benhnhanRepo.findByUser(user);	
+		
 		//benhnhanDto.setBenhnhan_id(benhNhan.getBenhnhan_id());
 		benhNhan.setDiachi(benhnhanDto.getDiachi());
 		benhNhan.setHo(benhnhanDto.getHo());
@@ -103,7 +106,7 @@ public class BenhNhanController {
 	}
 
 	@RequestMapping(value = "/xemhosobenhan", method = RequestMethod.GET)
-	public String showViewHSForm(HttpServletRequest request, Model model) {
+	public String showHosoSForm(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
 		LOGGER.debug("Rendering xemhosobenhan page.");
 		String email = (String) session.getAttribute("email");
@@ -122,7 +125,9 @@ public class BenhNhanController {
 		LOGGER.debug("Rendering dangkykham page.");
 		String email = (String) session.getAttribute("email");
 		LOGGER.info("username {}", email);
+		
 		User user = repository.findByEmail(email);
+		
 		DKKhamDto dkKhamDto = new DKKhamDto();
 		Benhnhan benhNhan = benhnhanRepo.findByUser(user);		
 		dkKhamDto.setMaBenhNhan(benhNhan.getBenhnhan_id());
