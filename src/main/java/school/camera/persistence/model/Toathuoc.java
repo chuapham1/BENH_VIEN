@@ -18,9 +18,12 @@ public class Toathuoc {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long MaToa;
 	
+	@OneToMany(fetch = FetchType.EAGER , mappedBy = "toathuoc")
+	private Set<Chitiettoa> chitiettoa = new HashSet<Chitiettoa>(0);
+	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "benhAnId", nullable = false)
-	private Benhan benhAn;
+	@JoinColumn(name = "benhan_id", nullable = false)
+	private Benhan benhan;
 	
 	public Long getMaToa() {
 		return MaToa;
@@ -30,13 +33,23 @@ public class Toathuoc {
 		MaToa = maToa;
 	}
 
-	public Benhan getBenhAn() {
-		return benhAn;
+	public Benhan getBenhan() {
+		return benhan;
 	}
 
-	public void setBenhAn(Benhan benhAn) {
-		this.benhAn = benhAn;
+	public void setBenhan(Benhan benhan) {
+		this.benhan = benhan;
 	}
+
+	public Set<Chitiettoa> getChitiettoa() {
+		return chitiettoa;
+	}
+
+	public void setChitiettoa(Set<Chitiettoa> chitiettoa) {
+		this.chitiettoa = chitiettoa;
+	}
+
+
 
 	
 

@@ -3,7 +3,9 @@ package school.camera.web.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,12 +25,16 @@ import org.springframework.web.servlet.ModelAndView;
 import school.camera.persistence.dao.BacsiRepo;
 import school.camera.persistence.dao.BenhAnRepo;
 import school.camera.persistence.dao.BenhnhanRepo;
+import school.camera.persistence.dao.ChitiettoaRepo;
 import school.camera.persistence.dao.DKKhamRepo;
+import school.camera.persistence.dao.ToathuocRepo;
 import school.camera.persistence.dao.UserRepository;
 import school.camera.persistence.model.Bacsi;
 import school.camera.persistence.model.Benhan;
 import school.camera.persistence.model.Benhnhan;
+import school.camera.persistence.model.Chitiettoa;
 import school.camera.persistence.model.DKKham;
+import school.camera.persistence.model.Toathuoc;
 import school.camera.persistence.model.User;
 import school.camera.persistence.service.BenhNhanDto;
 import school.camera.persistence.service.KhamBenhDto;
@@ -44,6 +50,12 @@ public class BacSiController {
 	@Autowired
 	private DKKhamRepo dkKhamRepo;
 
+	@Autowired
+	private ToathuocRepo toathuocRepo;
+	
+	@Autowired
+	private ChitiettoaRepo chitiettoaRepo;
+	
 	@Autowired
 	private BenhAnRepo benhAnRepo;
 
@@ -180,7 +192,23 @@ public class BacSiController {
 		benhAn.setBenhnhan(benhNhan);
 		benhAn.setBacsi(bacsi);
 		benhAnRepo.save(benhAn);
-		// show benh nhan info
+		
+		// save thuoc to db
+		Toathuoc toaThuoc = new Toathuoc();
+		//toaThuoc.setChitiettoa(dschitiettoa);
+		toaThuoc.setBenhan(benhAn);
+		//save toa thuoc to db.
+		toathuocRepo.save(toaThuoc);
+		//Set<Chitiettoa> dschitiettoa = new HashSet<Chitiettoa>(0);
+		for (ThuocDto thuocDto : dsThuoc) {
+			Chitiettoa chiTietToa = new Chitiettoa();
+			chiTietToa.setTenThuoc(thuocDto.getTenThuoc());
+			chiTietToa.setDonVi(thuocDto.getDonVi());
+			chiTietToa.setSoLuong(thuocDto.getSoLuong());
+			chiTietToa.setToathuoc(toaThuoc);
+			//save chit tiet  toa thuoc to db
+			chitiettoaRepo.save(chiTietToa);
+		}
 
 		ModelAndView mav = new ModelAndView("khambenh");
 		mav.addObject("khamBenh", khamBenhDto);

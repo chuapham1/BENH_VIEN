@@ -41,7 +41,10 @@ public class Benhan {
 	@JoinColumn(name = "bacsi_id", nullable = false)
 	private Bacsi bacsi;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "Benhan")
+	
+	
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "benhan")
 	private Set<Toathuoc> toaThuocs = new HashSet<Toathuoc>(0);
 	
 	
