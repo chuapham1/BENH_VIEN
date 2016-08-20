@@ -1,6 +1,8 @@
 package school.camera.persistence.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,9 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-public class BenhAn {
+public class Benhan {
 
 
 	@Id
@@ -37,6 +40,20 @@ public class BenhAn {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "bacsi_id", nullable = false)
 	private Bacsi bacsi;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "Benhan")
+	private Set<Toathuoc> toaThuocs = new HashSet<Toathuoc>(0);
+	
+	
+
+
+	public Set<Toathuoc> getToaThuocs() {
+		return toaThuocs;
+	}
+
+	public void setToaThuocs(Set<Toathuoc> toaThuocs) {
+		this.toaThuocs = toaThuocs;
+	}
 
 	public Long getBenhAnId() {
 		return benhAnId;
