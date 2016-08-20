@@ -42,14 +42,14 @@ public class Benhnhan {
 	 private Set<DKKham> DKKhams = new HashSet<DKKham>(0);
 	 
 	 @OneToMany(fetch = FetchType.EAGER , mappedBy = "benhnhan")
-	 private Set<BenhAn> benhAns = new HashSet<BenhAn>(0);
+	 private Set<Benhan> benhAns = new HashSet<Benhan>(0);
 	
 	 
-	public Set<BenhAn> getBenhAns() {
+	public Set<Benhan> getBenhAns() {
 		return benhAns;
 	}
 
-	public void setBenhAns(Set<BenhAn> benhAns) {
+	public void setBenhAns(Set<Benhan> benhAns) {
 		this.benhAns = benhAns;
 	}
 

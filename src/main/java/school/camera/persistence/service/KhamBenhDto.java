@@ -3,10 +3,8 @@ package school.camera.persistence.service;
 public class KhamBenhDto {
 	private Long benhnhan_id;
 	
-	private String ho;
+	private String hoTen;
 
-	private String ten;	
-	
 	private String trieuchung;
 	
 	private String ngayKham;
@@ -20,7 +18,6 @@ public class KhamBenhDto {
 	private String ngayXuatVien;
 	
 	private String danDo;
-
 
 	public String getNgayKham() {
 		return ngayKham;
@@ -78,20 +75,12 @@ public class KhamBenhDto {
 		this.benhnhan_id = benhnhan_id;
 	}
 
-	public String getHo() {
-		return ho;
+	public String getHoTen() {
+		return hoTen;
 	}
 
-	public void setHo(String ho) {
-		this.ho = ho;
-	}
-
-	public String getTen() {
-		return ten;
-	}
-
-	public void setTen(String ten) {
-		this.ten = ten;
+	public void setHoTen(String hoTen) {
+		this.hoTen = hoTen;
 	}
 
 	public String getTrieuchung() {

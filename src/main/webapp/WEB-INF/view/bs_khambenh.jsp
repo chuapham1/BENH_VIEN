@@ -76,30 +76,30 @@
     
     
     <div class="clean0"></div>  
-      <div class="thongtin_kb">
+      <!-- <div class="thongtin_kb">
           <form id="tt_kham_benh" name="kham_benh" method="post" action="">
           
-          	<!------------ FORM MA BENH NHAN ----------------->
+          	---------- FORM MA BENH NHAN ---------------
             <p>
               <label for="mabenhnhan">Mã Bệnh Nhân:</label>
               <input type="text" name="mabenhnhan" id="mabenhnhan" size="30" maxlength="11" />
             </p>
             
-            <!------------ FORM HO TEN BENH NHAN ----------------->
+            ---------- FORM HO TEN BENH NHAN ---------------
             <p>
               <label for="hoten">Họ Tên Bệnh Nhân:</label>
               <input type="text" name="hoten" id="hoten"  size="40" readonly="readonly"/>
             </p>
             
-            <!------------ FORM TRIEU CHUNG ----------------->
+            ---------- FORM TRIEU CHUNG ---------------
             <p>
               <label for="trieuchung">Triệu Chứng:</label>
               <textarea name="trieuchung" cols="80" rows="5" id="trieuchung" readonly="readonly"></textarea>
             </p>
           </form>
-      </div><!---end thongtin_kb--->
-
-      <div class="clean0"></div>
+      </div>-end thongtin_kb-
+ -->
+      <%-- <div class="clean0"></div>
       	
       <div class="khambenh">
       	<form id="khambenh" name="khambenh" method="post" action="">
@@ -173,13 +173,41 @@
             
             <!------------ FORM DAN DO ----------------->
   	  	  	<p>
-            <label for="dando">Dặn Dò: </label>
-            <input type="text" name="dando" id="dando" size="75" maxlength="100"/>
+	           <label for="dando">Dặn Dò: </label>
+	           <input type="text" name="dando" id="dando" size="75" maxlength="100"/>
   	  	  	</p>
-      	</form>
-        <button type="button" name="" value="" class="but_luuthuoc" data-text="Lưu"><span>Lưu</span></button>
+  	  	  	
+  	  	  	<button type="button" name="" value="" class="but_luuthuoc" data-text="Lưu"><span>Thêm</span></button>
+  	  	  	<div class="clean0"></div>
+  	  	  	
+  	  	  	<p style="font-size:16px;">
+	           DANH SÁCH THUỐC
+  	  	  	</p>
+  	  	  	
+  	  	  	<div style="height:150px; width: 70%;overflow:auto; float:left;">
+				<table width="100%" border="1">
+		        	<tr>
+		            	<th width="16%">STT</th>
+		                <th width="29%">Tên Thuốc</th>
+		                <th width="20%">Đơn Vị Tính</th>
+		                <th width="25%">Cách dùng</th>
+		                <th width="31%">Dặn dò</th>
+		            </tr>
+		            <c:forEach items="${benhNhans}" var="benhnhan" varStatus="status">  
+		            <tr>
+		            	<td>${status.index + 1}</td> 
+		                 <td>${benhnhan.benhnhan_id}</td> 
+		                <td>${benhnhan.ho}</td>
+		                <td>${benhnhan.ten}</td> 
+		                <td><a href="<c:url value="/khambenh/${benhnhan.benhnhan_id}" />" >kham</a></td>
+		            </tr>
+		            </c:forEach>
+		        </table>
+			</div><!---end div table---> 
+      	</form> --%>
+      	<!-- <div class="clean0"></div> <br>
+        <button type="submit" name="" value="" class="but_luuthuoc" data-text="Lưu"><span>Lưu</span></button> -->
       </div><!----- end khambenh --->
-    </div><!---end container-->
     <!-- InstanceEndEditable -->
 </body>
 <!-- InstanceEnd --></html>

@@ -52,6 +52,10 @@
     	<h3>Chào mừng bạn đến với hệ thống quản lý bệnh viện</h3>
     </div><!--banner-->
     
+    <div class="dangxuat">
+      		<a href="#">Đăng Xuất</a>
+    </div><!---end dangxuat-->
+    
     <div class="col-md-12 nav">
       <ul>
         <li> <a href="index_Benhnhan.html" class="active">Trang chủ </a></li>

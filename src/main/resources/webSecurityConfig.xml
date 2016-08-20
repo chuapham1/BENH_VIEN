@@ -30,6 +30,7 @@
 		<intercept-url pattern="/dangkykham*" access="isAuthenticated()" />
 		<intercept-url pattern="/bs_khambenh*" access="hasRole('ROLE_BACSI')" />
 		<intercept-url pattern="/khambenh*" access="hasRole('ROLE_BACSI')" />
+		<intercept-url pattern="/khambenh/themthuoc*" access="permitAll" />
 		<intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" />
 		
 	<intercept-url pattern="/*" access="permitAll" />

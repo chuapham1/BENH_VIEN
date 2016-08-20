@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+//tu tao database o duoi
 @Entity
 public class User {
 
@@ -39,8 +40,6 @@ public class User {
 
 	//private boolean tokenExpired;
 
-	
-
 	@OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Role role;
 	
@@ -55,8 +54,6 @@ public class User {
 		this.enabled = false;
 		//this.tokenExpired = false;
 	}
-
-	
 
 	public Bacsi getBacsi() {
 		return bacsi;

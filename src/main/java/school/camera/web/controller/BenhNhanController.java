@@ -160,7 +160,7 @@ public class BenhNhanController {
 		dkKham.setBacsi(bacsiKham);
 		dkKham.setBenhnhan(benhNhan);
 		 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-		    Date ngayKham = simpleDateFormat.parse(dkKhamDto.getNgayKham()+ " " + dkKhamDto.getGioKham());
+		 Date ngayKham = simpleDateFormat.parse(dkKhamDto.getNgayKham()+ " " + dkKhamDto.getGioKham());
 		    
 		dkKham.setNgay_dang_ky(ngayKham);
 		dkKham.setTrieu_chung(dkKhamDto.getTrieuChung());
