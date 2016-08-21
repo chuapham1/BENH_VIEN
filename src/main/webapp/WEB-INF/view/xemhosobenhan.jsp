@@ -25,23 +25,7 @@
 </head>
 
 <body>
-<!-- <header>
-<div class="container">
-	<div class="banner">
-    	<h3>Chào mừng bạn đến với hệ thống quản lý bệnh viện</h3>
-    </div>banner
-    
-    <div class="col-md-12 nav">
-      <ul>
-        <li> <a href="index_Benhnhan.html" class="active">Trang chủ </a></li>
-        <li><a href="#">Giới thiệu</a></li>
-        <li><a href="#"> Liên hệ </a></li>
-        <li> <a href="#">Góp ý</a></li>
-      </ul>
-    </div>
-</div>container
-</header>
- -->
+
 <div class="clean0"></div>
 <br/>
 
@@ -56,22 +40,19 @@
       <form name="xemhoso" method="post" action="">
         <p>
           <label for="mabn">Mã Bệnh Nhân:</label>
-          <input name="mabn" type="text" id="mabn" size="30" maxlength="20">
+          <input value="${benhNhan.benhnhan_id}" name="mabn" type="text" id="mabn" size="30" maxlength="20">
         <p>
-          <label for="tenbn">Tên Bệnh Nhân: </label>
-          <input name="tenbn" type="text" id="tenbn" size="50" maxlength="50" readonly>
+          <label for="tenbn">Họ Tên Bệnh Nhân: </label>
+          <input value="${benhNhan.ho} ${benhNhan.ten}" name="tenbn" type="text" id="tenbn" size="50" maxlength="50" readonly>
         </p>
         <p>
           <label for="ngaysinh_hs">Ngày Sinh: </label>
-          <input name="ngaysinh_hs" type="text" id="ngaysinh_hs" size="50" maxlength="20" readonly>
+          <input value="${benhNhan.ngaysinh}" name="ngaysinh_hs" type="text" id="ngaysinh_hs" size="50" maxlength="20" readonly>
         </p>
-        <p>
-          <label for="tuoi">Tuổi: </label>
-          <input name="tuoi" type="text" id="tuoi" size="20" maxlength="10" readonly>
-        </p>
+    
         <p>
           <label for="diachi_hs">Địa Chỉ: </label>
-          <input name="diachi_hs" type="text" id="diachi_hs" size="100" maxlength="50" readonly>
+          <input  value="${benhNhan.diachi}" name="diachi_hs" type="text" id="diachi_hs" size="100" maxlength="50" readonly>
         </p>
         
         <p>
@@ -89,167 +70,26 @@
                 <th width="14%">Ngày Xuất Viện</th>
                 <th width="18%">Tình Trạng Nhập Viện</th>
                 <th width="15%">Chẩn Đoán Ban Đầu</th>
-                <th width="12%">Loại Điều Trị</th>
+                <th width="12%">Chi Tiết</th>
               </tr>
+               <c:forEach items="${dskhamBenhDto}" var="benhAn" varStatus="status">  
               <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td>${status.index + 1}</td> 
+                <td>${benhAn.benhan_id}</td>
+                <td>${benhAn.tenBacSi}</td>
+                <td>${benhAn.ngayKham}</td>
+                <td>${benhAn.ngayXuatVien}</td>
+                <td>${benhAn.moTaBenh}</td>
+                <td>${benhAn.chuanDoan}</td>
+                <td><a href="<c:url value="/chitiet/${benhAn.benhan_id}" />" >chi tiết</a></td>
               </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
+               </c:forEach>
             </table>
         </div>
-        <button type="button" name="" value="" class="but_xem" data-text="Xem Chi Tiết"><span>Xem Chi Tiết</span></button>
       </form>
-      <div class="clean0"></div>
-	  <label style="float:none; font-size:24px; font-weight:bold;">CHI TIẾT : </label>
+s
       <br>
-      <div class="ngay_ctba">
-      	<!------------ NGAY KHAM----------------->
-        <p>
-            <label for="ngaykham">Ngày Khám: </label>
-            <select name="ngaykham" id="ngaykham" >
-                <option>Chọn Ngày Khám:</option>
-                <option value="#">01/08/2016</option>
-                <option value="#">02/08/2016</option>
-                <option value="#">03/08/2016</option>
-                <option value="#">04/08/2016</option>
-                <option value="#">05/08/2016</option>
-            </select>
-        </p>
-        
-        <!---------------------FORM MA CHI TIET BENH AN ----------------------------->
-        <p class="dong">
-            <label for="machitiet">Mã Số:</label>
-            <input name="machitiet" type="text" id="machitiet" size="30" maxlength="40" readonly>
-		</p>
-        
-        <!---------------------FORM TEN BAC SY ----------------------------->
-        <p class="dong">
-            <label for="tenbacsy">Bác sỹ tiếp nhận:</label>
-            <input name="tenbacsy" type="text" id="tenbacsy" size="30" maxlength="40" readonly>
-		</p>
-        
-        <!---------------------FORM MA BAC SY ----------------------------->
-        <p class="dong">
-            <label for="mabacsy">Mã Bác Sỹ:</label>
-            <input name="mabacsy" type="text" id="mabacsy" size="30" maxlength="40" readonly>
-		</p>
-        
-        <!---------------------FORM CHAN DOAN ----------------------------->
-        <p class="dong">
-            <label for="chandoan">Chẩn Đoán:</label>
-            <input name="chandoan" type="text" id="chandoan" size="50" maxlength="100" readonly>
-		</p>
-        
-        <label style="float:none; font-size:16px;">Cận Lâm Sàng : </label>
-        <table width="49%" border="1" cellspacing="2">
-              <tr>
-                <th width="15%">Mã Số</th>
-                <th width="33%">Nội Dung Thực Hiện</th>
-              </tr>
-              
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              
-              <tr> 
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-            </table>
-        
-        <br>
-        <label style="float:none; font-size:16px;">TOA THUỐC : </label>
-        
-        <!---------------------FORM MA TOA THUOC ----------------------------->
-        <p class="dong">
-            <label for="matoa">Mã Toa:</label>
-            <input name="matoa" type="text" id="matoa" size="30" maxlength="40" readonly>
-		</p>
-        
-        <table width="80%" border="1" cellspacing="2">
-              <tr>
-                <th width="19%">Mã Thuốc</th>
-                <th width="33%">Tên Thuốc</th>
-                <th width="23%">Số lượng</th>
-                <th width="26%">Liều dùng</th>
-              </tr>
-              
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-              
-              <tr> 
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
-            </table>
-      </div><!------end ngay_ctba---->
+      
   </div><!----end xem ho so---->
 </div><!----end container --->
 <!-- InstanceEndEditable -->

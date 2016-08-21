@@ -3,6 +3,8 @@ package school.camera.persistence.service;
 public class KhamBenhDto {
 	private Long benhnhan_id;
 	
+	private Long benhan_id;
+	
 	private String hoTen;
 
 	private String trieuchung;
@@ -18,6 +20,26 @@ public class KhamBenhDto {
 	private String ngayXuatVien;
 	
 	private String danDo;
+	
+	private String tenBacSi;
+
+	
+	
+	public Long getBenhan_id() {
+		return benhan_id;
+	}
+
+	public void setBenhan_id(Long benhan_id) {
+		this.benhan_id = benhan_id;
+	}
+
+	public String getTenBacSi() {
+		return tenBacSi;
+	}
+
+	public void setTenBacSi(String tenBacSi) {
+		this.tenBacSi = tenBacSi;
+	}
 
 	public String getNgayKham() {
 		return ngayKham;

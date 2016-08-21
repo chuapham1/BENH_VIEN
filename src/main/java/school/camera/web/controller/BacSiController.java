@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -37,6 +38,7 @@ import school.camera.persistence.model.DKKham;
 import school.camera.persistence.model.Toathuoc;
 import school.camera.persistence.model.User;
 import school.camera.persistence.service.BenhNhanDto;
+import school.camera.persistence.service.DKKhamDto;
 import school.camera.persistence.service.KhamBenhDto;
 import school.camera.persistence.service.ThuocDto;
 import school.camera.persistence.service.UserDto;
@@ -209,7 +211,7 @@ public class BacSiController {
 			//save chit tiet  toa thuoc to db
 			chitiettoaRepo.save(chiTietToa);
 		}
-
+		dsThuoc.clear();
 		ModelAndView mav = new ModelAndView("khambenh");
 		mav.addObject("khamBenh", khamBenhDto);
 		return mav;

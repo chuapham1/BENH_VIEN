@@ -31,9 +31,11 @@
 		<intercept-url pattern="/bs_khambenh*" access="hasRole('ROLE_BACSI')" />
 		<intercept-url pattern="/khambenh*" access="hasRole('ROLE_BACSI')" />
 		<intercept-url pattern="/khambenh/themthuoc*" access="permitAll" />
+		<intercept-url pattern="/henlichkham*" access="isAuthenticated()" />
+		<intercept-url pattern="/chitiet*" access="isAuthenticated()" />
+		<!-- <intercept-url pattern="/henlichkham*" access="hasRole('ROLE_BACSI')" /> -->
 		<intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" />
 		
-	<intercept-url pattern="/*" access="permitAll" />
 		<form-login login-page='/login.html'
 			authentication-failure-url="/login.html?error=true"
 			authentication-success-handler-ref="myAuthenticationSuccessHandler"

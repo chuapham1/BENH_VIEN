@@ -11,4 +11,5 @@ import school.camera.persistence.model.Benhnhan;
 public interface BenhAnRepo extends JpaRepository<Benhan, Long> {
 	public List<Benhan> findByBenhnhan(Benhnhan benhnhan);
 	public List<Benhan> findByBacsi(Bacsi bacsi);
+	public Benhan findByBenhAnId(Long benhAnId) ;
 }

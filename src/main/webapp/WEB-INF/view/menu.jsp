@@ -53,7 +53,8 @@
     </div><!--banner-->
     
     <div class="dangxuat">
-      		<a href="#">Đăng Xuất</a>
+    <a href="<c:url value="/j_spring_security_logout" />">Đăng Xuất</a>
+      		<!-- <a href="#">Đăng Xuất</a> -->
     </div><!---end dangxuat-->
     
     <div class="col-md-12 nav">
