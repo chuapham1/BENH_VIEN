@@ -40,7 +40,7 @@
                 <li> <a href="<c:url value="/bs_khambenh" />">Trang chủ </a></li>
                 <li><a href="<c:url value="/bs_khambenh" />">Khám Bệnh</a></li>
                 <%-- <a href="<c:url value="/thongtinbenhnhan" />"> --%>
-                <li><a href="BS_henlichkham.html">Hẹn Lịch Khám</a></li>
+                <li><a href="<c:url value="/henlichkham" />">Hẹn Lịch Khám</a></li>
             </ul>
                 
             <div class="clean0"></div>

@@ -87,7 +87,6 @@
             </table>
         </div>
       </form>
-s
       <br>
       
   </div><!----end xem ho so---->

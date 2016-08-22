@@ -8,6 +8,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,29 +22,15 @@
     </div> <!--end tieu de-->
 <div class="ngay_ctba">
       	<!------------ NGAY KHAM----------------->
+      	<form:form modelAttribute="search" method="POST">
         <p>
-            <label for="ngaykham">Ngày Khám: </label>
-            <select name="ngaykham" id="ngaykham" >
-                <option>Chọn Ngày Khám:</option>
-                <option value="#">01/08/2016</option>
-                <option value="#">02/08/2016</option>
-                <option value="#">03/08/2016</option>
-                <option value="#">04/08/2016</option>
-                <option value="#">05/08/2016</option>
-            </select>
+            <br>
              <label for="ngaykham">Mã Toa: </label>
-            <select name="maToa" id="matoa" >
-                <option>Chọn Mã Toa:</option>
-                <option value="#">1</option>
-                <option value="#">2</option>
-                <option value="#">3</option>
-                <option value="#">4</option>
-                <option value="#">5</option>
-            </select>
-            
-            
+             <form:select path="maToa" items="${maToas}">					
+			</form:select>	
+        <input type="submit" value="Tim" class="btn btn-default">
         </p>
-        
+        </form:form>
         <!---------------------FORM MA CHI TIET BENH AN ----------------------------->
         <p class="dong">
             <label for="machitiet">Mã Số:</label>
@@ -70,7 +57,7 @@
         <!---------------------FORM MA TOA THUOC ----------------------------->
         <p class="dong">
             <label for="matoa">Mã Toa:</label>
-            <input value="${matoa}" name="matoa" type="text" id="matoa" size="30" maxlength="40" readonly>
+            <input value="${search.maToa}" name="matoa" type="text" id="matoa" size="30" maxlength="40" readonly>
 		</p>
         
         <table width="80%" border="1" cellspacing="2">

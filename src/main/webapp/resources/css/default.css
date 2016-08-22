@@ -123,7 +123,7 @@ body{
 	min-height: 300px;
 	margin-left: 50px;
 	}
-.dangky form p{
+.dangky p{
 	margin-bottom: 20px;
 	}
 .dangky label {
@@ -325,4 +325,17 @@ body{
 .ngay_ctba label {
 	width: 170px;
 	color: #333333;
+	}
+
+.henlich {
+	width: 100%;
+	min-height: 150px;
+	margin-left: 50px;
+	}
+.henlich p{
+	margin-bottom: 20px;
+	}
+.henlich label {
+	width: 170px;
+	float: left;
 	}

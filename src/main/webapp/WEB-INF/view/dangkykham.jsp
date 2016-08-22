@@ -47,7 +47,7 @@
            <!--  <input type="text" name="mabenhnhan" id="mabenhnhan" size="30" maxlength="20" /> -->
         </p>
         
-        <!------------ Loai Kham ----------------->
+        <!------------ BAC SY ----------------->
         <p>
             <label for="bacsy">Bác Sỹ: </label>
             <form:select path="bacsiId">
