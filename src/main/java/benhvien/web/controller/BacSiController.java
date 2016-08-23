@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -73,22 +74,27 @@ public class BacSiController {
 	private static List<ThuocDto> dsThuoc = new ArrayList<ThuocDto>();
 	// themthuoc
 	@RequestMapping(value = "/khambenh/themthuoc", method = RequestMethod.GET)
-	public String themthuoc(HttpServletRequest request, Model model, @RequestParam("tenthuoc") String tenthuoc,
+	public @ResponseBody String themthuoc(HttpServletRequest request, Model model, @RequestParam("tenthuoc") String tenthuoc,
 			@RequestParam("soluong") int soluong, @RequestParam("donvi") String donvi) {
-		ThuocDto thuoc = new ThuocDto(tenthuoc, donvi, soluong);
-		HttpSession session = request.getSession(false);		
-		dsThuoc.add(thuoc);		
-		for (ThuocDto thuocDto : dsThuoc) {
-			LOGGER.info(thuocDto.getDonVi() + " " + thuocDto.getSoLuong() + " " + thuocDto.getTenThuoc());
+		try {
+			ThuocDto thuoc = new ThuocDto(tenthuoc, donvi, soluong);
+			HttpSession session = request.getSession(false);		
+			dsThuoc.add(thuoc);		
+			for (ThuocDto thuocDto : dsThuoc) {
+				LOGGER.info(thuocDto.getDonVi() + " " + thuocDto.getSoLuong() + " " + thuocDto.getTenThuoc());
+			}
+			LOGGER.info("Rthem thuoc page." + tenthuoc + " " + soluong + " " + donvi);
+			String email = (String) session.getAttribute("email");
+			LOGGER.info("username {}", email);
+		} catch (Exception e) {
+			return "luu thanh cong";
 		}
-		LOGGER.info("Rthem thuoc page." + tenthuoc + " " + soluong + " " + donvi);
-		String email = (String) session.getAttribute("email");
-		LOGGER.info("username {}", email);
-		return "ok";
+		
+		return "du lieu khong hop le";
 
 	}
 	@RequestMapping(value = "/henlich", method = RequestMethod.GET)
-	public String henlich(HttpServletRequest request, Model model, @RequestParam("mabenhnhan") Long mabenhnhan,
+	public @ResponseBody String henlich(HttpServletRequest request, Model model, @RequestParam("mabenhnhan") Long mabenhnhan,
 			@RequestParam("ngaykham") String ngaykham, @RequestParam("giokham") String giokham) {
 		LOGGER.info("mabenhnhan " + mabenhnhan + ngaykham + giokham);
 		try {
@@ -101,10 +107,10 @@ public class BacSiController {
 				dkKhamRepo.save(dkKham);
 			}
 		} catch (Exception e) {
-			return "Dữ liệu không hợp lệ";
+			return "Du lieu khong hop le";
 		}
 		
-		return "Lưu Thành Công";
+		return "Luu Thanh Cong";
 	}
 
 	@RequestMapping(value = "/bs_khambenh", method = RequestMethod.GET)
@@ -181,6 +187,7 @@ public class BacSiController {
 		LOGGER.info("username {}", email);
 		User user = repository.findByEmail(email);
 		Benhnhan benhNhan = benhnhanRepo.findByBenhnhanId(benhNhanId);
+		
 		Benhan benhAn = new Benhan();
 		benhAn.setChuanDoan(khamBenhDto.getChuanDoan());
 		benhAn.setDanDo(khamBenhDto.getDanDo());

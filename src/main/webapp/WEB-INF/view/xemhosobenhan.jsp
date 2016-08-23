@@ -40,7 +40,7 @@
       <form name="xemhoso" method="post" action="">
         <p>
           <label for="mabn">Mã Bệnh Nhân:</label>
-          <input value="${benhNhan.benhnhan_id}" name="mabn" type="text" id="mabn" size="30" maxlength="20">
+          <input value="${benhNhan.benhnhan_id}" name="mabn" type="text" id="mabn" size="30" maxlength="20" readonly="readonly">
         <p>
           <label for="tenbn">Họ Tên Bệnh Nhân: </label>
           <input value="${benhNhan.ho} ${benhNhan.ten}" name="tenbn" type="text" id="tenbn" size="50" maxlength="50" readonly>
@@ -66,7 +66,7 @@
                 <th width="4%">STT</th>
                 <th width="10%">Mã Bệnh Án</th>
                 <th width="13%">Bác Sỹ Tiếp Nhận</th>
-                <th width="14%">Ngày Nhập Viện</th>
+                <th width="14%">Ngày Khám</th>
                 <th width="14%">Ngày Xuất Viện</th>
                 <th width="18%">Tình Trạng Nhập Viện</th>
                 <th width="15%">Chẩn Đoán Ban Đầu</th>

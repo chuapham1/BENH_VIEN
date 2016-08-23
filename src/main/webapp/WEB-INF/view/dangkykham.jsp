@@ -42,6 +42,9 @@
    <form:form modelAttribute="dkKham" method="POST"  enctype="utf8">
         <!------------ MA BENH NHAN ----------------->
         <p>
+        <label for="mess">${mess}</label>
+        </p>
+        <p>
             <label for="mabenhnhan">Mã Bệnh Nhân:</label>
             <form:input path="maBenhNhan"  name="mabenhnhan" id="mabenhnhan" size="30" maxlength="20" />
            <!--  <input type="text" name="mabenhnhan" id="mabenhnhan" size="30" maxlength="20" /> -->

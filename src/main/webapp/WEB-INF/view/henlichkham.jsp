@@ -42,7 +42,7 @@
 	        <!------------ Button Chuc Nang ----------------->
 	        <div class="but_chucnang">
 	            <!--Button luu-->
-	             <input onclick="DatLichFunction()"  value="Đặt Lịch" class="but_datlich" />
+	             <input type="button" onclick="DatLichFunction()"  value="Đặt Lịch" class="but_datlich" />
 	            	<label id="mess" for="mess"></label>
 	            <!-- <button type="button" name="" value="" class="but_datlich" data-text="Đặt Lịch"><span>Đặt Lịch</span>
 	            </button> -->
@@ -87,7 +87,8 @@
 			 var ngaykham = $('#ngaykham').val(); 
 			 var giokham = $('#giokham').val();
 			 console.log("HenFunction id "+ id  + "ngaykham" + ngaykham + "giokham" + giokham);
-		 	$.ajax({			
+		 	$.ajax({
+		 		type : "GET",
 				url : 'henlich?mabenhnhan=' + id + " &ngaykham=" + ngaykham + "&giokham=" +giokham,			
 				success : function(data) {
 					var str = data;

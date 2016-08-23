@@ -280,27 +280,6 @@ public class BenhNhanController {
 	@RequestMapping(value = "/dangkykham", method = RequestMethod.POST)
 	public ModelAndView saveDKForm(HttpServletRequest request, Model model,
 			@ModelAttribute("dkKham") DKKhamDto dkKhamDto) throws ParseException {
-		HttpSession session = request.getSession(false);
-		LOGGER.debug("Rendering dangkykham page.");
-		String email = (String) session.getAttribute("email");
-		LOGGER.info("username {}", email);
-		User user = repository.findByEmail(email);
-
-		Benhnhan benhNhan = benhnhanRepo.findByUser(user);
-
-		Bacsi bacsiKham = bacsiRepo.findByBacsiId(dkKhamDto.getBacsiId());
-
-		DKKham dkKham = new DKKham();
-		dkKham.setHenLich(false);
-		dkKham.setBacsi(bacsiKham);
-		dkKham.setBenhnhan(benhNhan);
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-		Date ngayKham = simpleDateFormat.parse(dkKhamDto.getNgayKham() + " " + dkKhamDto.getGioKham());
-
-		dkKham.setNgay_dang_ky(ngayKham);
-		dkKham.setTrieu_chung(dkKhamDto.getTrieuChung());
-		dkKhamRepo.save(dkKham);
-
 		LinkedHashMap<Long, String> bacsi = new LinkedHashMap<Long, String>();
 
 		List<Bacsi> bacsis = bacsiRepo.findAll();
@@ -308,10 +287,38 @@ public class BenhNhanController {
 			LOGGER.info("bacsi {}", bacsi2.getBacsiId());
 			bacsi.put(bacsi2.getBacsiId(), bacsi2.getHo() + " " + bacsi2.getTen());
 		}
+		try {
+			HttpSession session = request.getSession(false);
+			LOGGER.debug("Rendering dangkykham page.");
+			String email = (String) session.getAttribute("email");
+			LOGGER.info("username {}", email);
+			User user = repository.findByEmail(email);
 
-		ModelAndView mav = new ModelAndView("dangkykham", "dkKham", dkKhamDto);
-		mav.addObject("bacsi", bacsi);
-		return mav;
+			Benhnhan benhNhan = benhnhanRepo.findByUser(user);
+
+			Bacsi bacsiKham = bacsiRepo.findByBacsiId(dkKhamDto.getBacsiId());
+
+			DKKham dkKham = new DKKham();
+			dkKham.setHenLich(false);
+			dkKham.setBacsi(bacsiKham);
+			dkKham.setBenhnhan(benhNhan);
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			Date ngayKham = simpleDateFormat.parse(dkKhamDto.getNgayKham() + " " + dkKhamDto.getGioKham());
+
+			dkKham.setNgay_dang_ky(ngayKham);
+			dkKham.setTrieu_chung(dkKhamDto.getTrieuChung());
+			dkKhamRepo.save(dkKham);
+
+			ModelAndView mav = new ModelAndView("dangkykham", "dkKham", dkKhamDto);
+			mav.addObject("bacsi", bacsi);
+			mav.addObject("mess", "dang ky kham thanh cong");
+			return mav;
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView("dangkykham", "dkKham", dkKhamDto);
+			mav.addObject("bacsi", bacsi);
+			mav.addObject("mess", "du lieu khong hop le");
+			
+			return mav;
+		}
 	}
-
 }

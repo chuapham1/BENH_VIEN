@@ -118,21 +118,15 @@
   	  	  	<div style="height:150px; width: 70%;overflow:auto; float:left;">
 				<table width="100%" border="1">
 		        	<tr>
-		            	<th width="16%">STT</th>
+		            	
 		                <th width="29%">Tên Thuốc</th>
 		                <th width="20%">Đơn Vị Tính</th>
-		                <th width="25%">Cách dùng</th>
-		                <th width="31%">Dặn dò</th>
+		                <th width="25%">Số Lượng</th>
+		               
 		            </tr>
-		            <%-- <c:forEach items="${benhNhans}" var="benhnhan" varStatus="status">  
-		            <tr>
-		            	<td>${status.index + 1}</td> 
-		                 <td>${benhnhan.benhnhan_id}</td> 
-		                <td>${benhnhan.ho}</td>
-		                <td>${benhnhan.ten}</td> 
-		                <td><a href="<c:url value="/khambenh/${benhnhan.benhnhan_id}" />" >kham</a></td>
-		            </tr>
-		            </c:forEach> --%>
+		           
+		           
+		          
 		        </table>
 		         <button type="submit" name="" value="" class="but_luuthuoc" data-text="Lưu"><span>Lưu</span></button>
       	 </form:form>
@@ -141,22 +135,28 @@
     </div><!---end container-->
    <script>
   
-	    function AddFunction() {		
-	    var tenthuoc = $('#tenthuoc').val();
-	    var soluong = $('#soluong').val();
-	    var donvitinh =  $('select[name=donvitinh]').val();
-		console.log("AddFunction tenthuoc " + tenthuoc + "donvitinh " + donvitinh + "so luong" + soluong );
-		
-		$.ajax({			
-			url : 'themthuoc?tenthuoc=' + tenthuoc + " &soluong=" + soluong + "&donvi=" +donvitinh,			
-			success : function(data) {
-				var str = data;
-				console.log("data" +data);
-				$('#videodiv').show();
-		 	 	$('#playerdiv').html(data);
-			}
-		});
-	    }
+
+   function AddFunction() {		
+   var tenthuoc = $('#tenthuoc').val();
+   var soluong = $('#soluong').val();
+   var donvitinh =  $('select[name=donvitinh]').val();
+	console.log("AddFunction tenthuoc " + tenthuoc + "donvitinh " + donvitinh + "so luong" + soluong );
+	
+   
+	 $("table").append("<tr>" 
+			 + "<td>" + tenthuoc + "</td>"
+			 + "<td>" + donvitinh + "</td>"
+			 + "<td>" + soluong + "</td>"
+			 +"</tr>");
+	 
+	$.ajax({			
+		url : 'themthuoc?tenthuoc=' + tenthuoc + " &soluong=" + soluong + "&donvi=" +donvitinh,			
+		success : function(data) {
+			var str = data;
+			$("#mess").html(data);
+		}
+	});
+   }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </body>
