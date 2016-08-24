@@ -311,7 +311,7 @@ public class BenhNhanController {
 
 			ModelAndView mav = new ModelAndView("dangkykham", "dkKham", dkKhamDto);
 			mav.addObject("bacsi", bacsi);
-			mav.addObject("mess", "dang ky kham thanh cong");
+			mav.addObject("mess", "Dang ky thanh cong");
 			return mav;
 		} catch (Exception e) {
 			ModelAndView mav = new ModelAndView("dangkykham", "dkKham", dkKhamDto);

@@ -76,11 +76,13 @@ public class RegistrationController {
 
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String showAdmin(WebRequest request, Model model) {
+	public ModelAndView showAdmin(WebRequest request, Model model) {
 		LOGGER.debug("Rendering registration page.");
-		UserDto accountDto = new UserDto();
-		model.addAttribute("user", accountDto);
-		return "admin";
+		UserDto accountDto = new UserDto();			
+			model.addAttribute("user", accountDto);
+			ModelAndView mav = new ModelAndView("admin", "user", accountDto);
+			return mav;
+		
 	}
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.POST)
@@ -100,6 +102,7 @@ public class RegistrationController {
 		LOGGER.info("thanh cong");
 		return new ModelAndView("admin", "user", accountDto);
 	}
+	
 	public User createBacsiAccount(UserDto accountDto) throws EmailExistsException {
 		if (emailExist(accountDto.getEmail())) {
 			throw new EmailExistsException("There is an account with that email adress: " + accountDto.getEmail());

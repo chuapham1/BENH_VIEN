@@ -44,8 +44,6 @@
       <div class="clean0"></div>
       	
       <div class="khambenh">
-      	
-        	
             <!------------ FORM NGAY KHAM ----------------->
             <p>
               <label for="ngaykham">Ngày khám: </label>
@@ -124,9 +122,6 @@
 		                <th width="25%">Số Lượng</th>
 		               
 		            </tr>
-		           
-		           
-		          
 		        </table>
 		         <button type="submit" name="" value="" class="but_luuthuoc" data-text="Lưu"><span>Lưu</span></button>
       	 </form:form>

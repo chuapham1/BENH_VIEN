@@ -40,10 +40,8 @@
   
   <div class ="dangky">
    <form:form modelAttribute="dkKham" method="POST"  enctype="utf8">
+   
         <!------------ MA BENH NHAN ----------------->
-        <p>
-        <label for="mess">${mess}</label>
-        </p>
         <p>
             <label for="mabenhnhan">Mã Bệnh Nhân:</label>
             <form:input path="maBenhNhan"  name="mabenhnhan" id="mabenhnhan" size="30" maxlength="20" />
@@ -89,7 +87,7 @@
             <input type="submit" value="Đặt Lịch" class="but_datlich" />
             <!-- <button type="button" name="" value="" class="but_datlich" data-text="Đặt Lịch"><span>Đặt Lịch</span>
             </button> -->
-         
+         	<label for="mess">${mess}</label>
         </div><!--end button chuc nang-->
    </form:form> <!--end form -->
   </div><!-- end dang ky -->

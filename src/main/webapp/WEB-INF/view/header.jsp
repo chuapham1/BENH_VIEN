@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
@@ -7,7 +8,7 @@
 <!-- saved from url=(0022)https://ipcamlive.com/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
-	<title>Embedding IP Camera Live Video Stream in web page</title>
+	<title>Benh Vien</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="ip camera, network camera, embed ip camera, embed ip camera into webpage, embed ip camera stream in web page, embed network camera on website">
 	<meta name="description" content="Video streaming solution for embedding your IP camera live video stream in web page.">

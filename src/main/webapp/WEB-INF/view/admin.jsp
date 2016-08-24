@@ -86,7 +86,8 @@
         
         <div style="padding-left:60px; padding-top:20px; margin-left:110px;">
 
-        	<input type="submit" name="tao" value="Tạo Bác Sỹ"/>
+        	<input type="submit" onclick="dkyBacsyFunction(${benhnhan.benhnhan_id})" name="tao" value="Tạo Bác Sỹ"/>
+        	<label id="mess" for="mess"></label>
         </div>
     </div><!--end dang ky bacsy ------>
      </form:form>

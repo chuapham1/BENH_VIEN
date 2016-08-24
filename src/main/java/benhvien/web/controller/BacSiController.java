@@ -72,6 +72,7 @@ public class BacSiController {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	private static List<ThuocDto> dsThuoc = new ArrayList<ThuocDto>();
+	
 	// themthuoc
 	@RequestMapping(value = "/khambenh/themthuoc", method = RequestMethod.GET)
 	public @ResponseBody String themthuoc(HttpServletRequest request, Model model, @RequestParam("tenthuoc") String tenthuoc,
@@ -93,6 +94,7 @@ public class BacSiController {
 		return "du lieu khong hop le";
 
 	}
+	
 	@RequestMapping(value = "/henlich", method = RequestMethod.GET)
 	public @ResponseBody String henlich(HttpServletRequest request, Model model, @RequestParam("mabenhnhan") Long mabenhnhan,
 			@RequestParam("ngaykham") String ngaykham, @RequestParam("giokham") String giokham) {
