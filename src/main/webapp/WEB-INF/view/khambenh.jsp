@@ -39,6 +39,17 @@
              <%--  <input value="${khamBenh.trieuchung}" name="trieuchung" id="trieuchung"  readonly="readonly" /> --%>
             </p>
           <%-- </form> --%>
+          
+          <!------------ Loai Kham ----------------->
+        <p>
+            <label for="bacsy">Tên Bệnh : </label>
+            <select name="bacsy" id="bacsy" > 
+                <option value="#">Kiet Suc</option>
+                <option value="#">def</option>
+                <option value="#">Sot Sieu vi</option>
+            </select>
+        </p>
+          
       </div><!---end thongtin_kb--->
 
       <div class="clean0"></div>

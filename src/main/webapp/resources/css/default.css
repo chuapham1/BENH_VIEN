@@ -339,3 +339,21 @@ body{
 	width: 170px;
 	float: left;
 	}
+	
+.btn_tim{
+	width: 70px;
+	height: 30px;
+	color: #333333;
+	border: solid #999 1px;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	padding: 0px;
+	margin-top:20px;
+	margin-left:30px;
+	}
+.btn_tim:hover{
+	background-color:#E6F5FF;
+	color: #0099FF;
+	border: solid #0099CC 1px;
+	border-radius: 5px;
+	}

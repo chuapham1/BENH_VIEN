@@ -25,17 +25,18 @@
       	<form:form modelAttribute="search" method="POST">
         <p>
             <br>
-             <label for="ngaykham">Mã Toa: </label>
+             <!-- <label for="ngaykham">Mã Toa: </label> -->
+             <label for="ngaykham">Mã Chi Tiết Bệnh Án: </label>
              <form:select path="maToa" items="${maToas}">					
 			</form:select>	
-        <input type="submit" value="Tim" class="btn btn-default">
+        <input type="submit" value="Tìm" class="btn_tim">
         </p>
         </form:form>
-        <!---------------------FORM MA CHI TIET BENH AN ----------------------------->
+        <%-- <!---------------------FORM MA CHI TIET BENH AN ----------------------------->
         <p class="dong">
             <label for="machitiet">Mã Số:</label>
             <input value="${benhAn.benhan_id}" name="machitiet" type="text" id="machitiet" size="30" maxlength="40" readonly>
-		</p>
+		</p> --%>
         
         <!---------------------FORM TEN BAC SY ----------------------------->
         <p class="dong">
@@ -57,7 +58,7 @@
         <!---------------------FORM MA TOA THUOC ----------------------------->
         <p class="dong">
             <label for="matoa">Mã Toa:</label>
-            <input value="${search.maToa}" name="matoa" type="text" id="matoa" size="30" maxlength="40" readonly>
+            <input value="${search.maToa}" name="matoa" type="text" id="matoa" size="10" maxlength="40" readonly>
 		</p>
         
         <table width="80%" border="1" cellspacing="2">
