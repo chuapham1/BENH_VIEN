@@ -19,7 +19,7 @@
 <link href="<c:url value="/resources/css/default.css"/>" rel="stylesheet" type="text/css" >
 <link href="<c:url value="/resources/css/bootstrap.css"/>" rel="stylesheet" type="text/css">
 <link href="<c:url value="/resources/css/buttons.css"/>" rel="stylesheet" type="text/css">
-
+<script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <!-- InstanceBeginEditable name="head" -->
 <!-- InstanceEndEditable -->
 </head>

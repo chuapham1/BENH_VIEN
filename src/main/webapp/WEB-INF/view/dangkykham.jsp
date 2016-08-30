@@ -61,14 +61,14 @@
         <!------------ NGAY KHAM ----------------->
         <p>
           <label for="ngaykham">Ngày Khám:</label>
-           <form:input path="ngayKham" name="ngaykham" id="ngaykham" size="30" maxlength="20" />
+           <form:input path="ngayKham" name="ngaykham" id="ngaykham" size="30" maxlength="20" placeholder="DD-MM-YYYY:" />
           
         </p>
         
         <!------------ GIO KHAM ----------------->
         <p>
           <label for="giokham">Giờ Khám:</label>
-           <form:input path="gioKham" name="giokham" id="giokham" size="30" maxlength="20"/>
+           <form:input path="gioKham" name="giokham" id="giokham" size="30" maxlength="20" placeholder="HH:MM"/>
          
         </p>
     

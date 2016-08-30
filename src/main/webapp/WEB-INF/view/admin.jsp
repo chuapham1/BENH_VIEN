@@ -33,6 +33,11 @@
 	<p style=" color:#FFF; font-size:16px; padding-left: 30px; margin-left::40px; line-height: 50px;"> ADMIN </p>
 </div>
 
+<div class="dangxuat">
+    <a href="<c:url value="/j_spring_security_logout" />">Đăng Xuất</a>
+      		<!-- <a href="#">Đăng Xuất</a> -->
+    </div><!---end dangxuat-->
+
 <div class="container">
 	<div class=" col-lg-12 tieude">
     	<p> Đăng Ký Mới </p>
@@ -87,7 +92,7 @@
         <div style="padding-left:60px; padding-top:20px; margin-left:110px;">
 
         	<input type="submit" onclick="dkyBacsyFunction(${benhnhan.benhnhan_id})" name="tao" value="Tạo Bác Sỹ"/>
-        	<label id="mess" for="mess"></label>
+        	<label id="mess" for="mess">${mess}</label>
         </div>
     </div><!--end dang ky bacsy ------>
      </form:form>

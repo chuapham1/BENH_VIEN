@@ -42,14 +42,18 @@ public class Benhan {
 	private Bacsi bacsi;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "benhan")
-	private Set<Toathuoc> toaThuocs = new HashSet<Toathuoc>(0);
+	private Set<ChitietBenhAn> ChitietBenhAns = new HashSet<ChitietBenhAn>(0);
+	
+	
 
-	public Set<Toathuoc> getToaThuocs() {
-		return toaThuocs;
+
+
+	public Set<ChitietBenhAn> getChitietBenhAns() {
+		return ChitietBenhAns;
 	}
 
-	public void setToaThuocs(Set<Toathuoc> toaThuocs) {
-		this.toaThuocs = toaThuocs;
+	public void setChitietBenhAns(Set<ChitietBenhAn> chitietBenhAns) {
+		ChitietBenhAns = chitietBenhAns;
 	}
 
 	public Long getBenhAnId() {

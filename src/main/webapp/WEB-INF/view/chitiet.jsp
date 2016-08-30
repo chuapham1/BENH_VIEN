@@ -15,6 +15,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
+<style>
+.matoa {
+	width: 50px;
+}
+</style>
 <body>
 <div class="container">
 <div class=" col-lg-12 tieude">
@@ -27,16 +32,16 @@
             <br>
              <!-- <label for="ngaykham">Mã Toa: </label> -->
              <label for="ngaykham">Mã Chi Tiết Bệnh Án: </label>
-             <form:select path="maToa" items="${maToas}">					
+             <form:select path="maToa" class="matoa" items="${maToas}">					
 			</form:select>	
         <input type="submit" value="Tìm" class="btn_tim">
         </p>
         </form:form>
-        <%-- <!---------------------FORM MA CHI TIET BENH AN ----------------------------->
+         <!---------------------FORM MA CHI TIET BENH AN ----------------------------->
         <p class="dong">
-            <label for="machitiet">Mã Số:</label>
-            <input value="${benhAn.benhan_id}" name="machitiet" type="text" id="machitiet" size="30" maxlength="40" readonly>
-		</p> --%>
+            <label for="machitiet">Ngày Khám:</label>
+            <input value="${benhAn.ngayKham}" name="machitiet" type="text" id="machitiet" size="30" maxlength="40" readonly>
+		</p> 
         
         <!---------------------FORM TEN BAC SY ----------------------------->
         <p class="dong">

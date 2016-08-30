@@ -1,6 +1,7 @@
 package benhvien.web.controller;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import benhvien.persistence.dao.BacsiRepo;
 import benhvien.persistence.dao.BenhAnRepo;
 import benhvien.persistence.dao.BenhnhanRepo;
+import benhvien.persistence.dao.ChitietBenhAnRepo;
 import benhvien.persistence.dao.ChitiettoaRepo;
 import benhvien.persistence.dao.DKKhamRepo;
 import benhvien.persistence.dao.ToathuocRepo;
@@ -36,6 +38,7 @@ import benhvien.persistence.dao.UserRepository;
 import benhvien.persistence.model.Bacsi;
 import benhvien.persistence.model.Benhan;
 import benhvien.persistence.model.Benhnhan;
+import benhvien.persistence.model.ChitietBenhAn;
 import benhvien.persistence.model.Chitiettoa;
 import benhvien.persistence.model.DKKham;
 import benhvien.persistence.model.Toathuoc;
@@ -57,10 +60,13 @@ public class BacSiController {
 
 	@Autowired
 	private ToathuocRepo toathuocRepo;
-	
+
 	@Autowired
 	private ChitiettoaRepo chitiettoaRepo;
-	
+
+	@Autowired
+	private ChitietBenhAnRepo chitietBenhAnRepo;
+
 	@Autowired
 	private BenhAnRepo benhAnRepo;
 
@@ -72,15 +78,16 @@ public class BacSiController {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 	private static List<ThuocDto> dsThuoc = new ArrayList<ThuocDto>();
-	
+
 	// themthuoc
 	@RequestMapping(value = "/khambenh/themthuoc", method = RequestMethod.GET)
-	public @ResponseBody String themthuoc(HttpServletRequest request, Model model, @RequestParam("tenthuoc") String tenthuoc,
-			@RequestParam("soluong") int soluong, @RequestParam("donvi") String donvi) {
+	public @ResponseBody String themthuoc(HttpServletRequest request, Model model,
+			@RequestParam("tenthuoc") String tenthuoc, @RequestParam("soluong") int soluong,
+			@RequestParam("donvi") String donvi) {
 		try {
 			ThuocDto thuoc = new ThuocDto(tenthuoc, donvi, soluong);
-			HttpSession session = request.getSession(false);		
-			dsThuoc.add(thuoc);		
+			HttpSession session = request.getSession(false);
+			dsThuoc.add(thuoc);
 			for (ThuocDto thuocDto : dsThuoc) {
 				LOGGER.info(thuocDto.getDonVi() + " " + thuocDto.getSoLuong() + " " + thuocDto.getTenThuoc());
 			}
@@ -90,28 +97,30 @@ public class BacSiController {
 		} catch (Exception e) {
 			return "luu thanh cong";
 		}
-		
+
 		return "du lieu khong hop le";
 
 	}
-	
+
 	@RequestMapping(value = "/henlich", method = RequestMethod.GET)
-	public @ResponseBody String henlich(HttpServletRequest request, Model model, @RequestParam("mabenhnhan") Long mabenhnhan,
-			@RequestParam("ngaykham") String ngaykham, @RequestParam("giokham") String giokham) {
+	public @ResponseBody String henlich(HttpServletRequest request, Model model,
+			@RequestParam("mabenhnhan") Long mabenhnhan, @RequestParam("ngaykham") String ngaykham,
+			@RequestParam("giokham") String giokham, @RequestParam("trieuchung") String trieuchung) {
 		LOGGER.info("mabenhnhan " + mabenhnhan + ngaykham + giokham);
 		try {
 			Benhnhan benhNhan = benhnhanRepo.findByBenhnhanId(mabenhnhan);
 			List<DKKham> dsdkKham = dkKhamRepo.findByBenhnhan(benhNhan);
+			
 			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 			for (DKKham dkKham : dsdkKham) {
-				dkKham.setHenLich(true);
 				dkKham.setNgay_dang_ky(dateFormat.parse(ngaykham + " " + giokham));
+				dkKham.setTrieu_chung(trieuchung);
 				dkKhamRepo.save(dkKham);
 			}
 		} catch (Exception e) {
 			return "Du lieu khong hop le";
 		}
-		
+
 		return "Luu Thanh Cong";
 	}
 
@@ -129,13 +138,11 @@ public class BacSiController {
 
 		List<BenhNhanDto> BenhNhans = new ArrayList<BenhNhanDto>();
 		for (DKKham dkKham : dsDkKham) {
-			if (dkKham.isHenLich()==true) {
-				BenhNhanDto benhNhanDto = new BenhNhanDto();
-				benhNhanDto.setBenhnhan_id(dkKham.getBenhnhan().getBenhnhan_id());
-				benhNhanDto.setHo(dkKham.getBenhnhan().getHo());
-				benhNhanDto.setTen(dkKham.getBenhnhan().getTen());
-				BenhNhans.add(benhNhanDto);
-			}
+			BenhNhanDto benhNhanDto = new BenhNhanDto();
+			benhNhanDto.setBenhnhan_id(dkKham.getBenhnhan().getBenhnhan_id());
+			benhNhanDto.setHo(dkKham.getBenhnhan().getHo());
+			benhNhanDto.setTen(dkKham.getBenhnhan().getTen());
+			BenhNhans.add(benhNhanDto);
 		}
 		ModelAndView mav = new ModelAndView("bs_khambenh");
 		mav.addObject("benhNhans", BenhNhans);
@@ -182,72 +189,156 @@ public class BacSiController {
 
 	@RequestMapping(value = "/khambenh/{id}", method = RequestMethod.POST)
 	public ModelAndView savekhamBenh(HttpServletRequest request, Model model, @PathVariable("id") Long benhNhanId,
-			@ModelAttribute("khamBenh") KhamBenhDto khamBenhDto) {
+			@ModelAttribute("khamBenh") KhamBenhDto khamBenhDto) throws ParseException {
 		HttpSession session = request.getSession(false);
 		LOGGER.debug("Rendering bs_khambenh page.");
 		String email = (String) session.getAttribute("email");
 		LOGGER.info("username {}", email);
 		User user = repository.findByEmail(email);
-		Benhnhan benhNhan = benhnhanRepo.findByBenhnhanId(benhNhanId);
-		
-		Benhan benhAn = new Benhan();
-		benhAn.setChuanDoan(khamBenhDto.getChuanDoan());
-		benhAn.setDanDo(khamBenhDto.getDanDo());
-		benhAn.setLoaiDieuTri(khamBenhDto.isLoaiDieuTri());
-		benhAn.setMoTaBenh(khamBenhDto.getMoTaBenh());
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		if (!khamBenhDto.isLoaiDieuTri()) {
-			// neu ngoai tru thi ngay kham - ngay xuat va coa khoi ds benh nhan.
-			benhAn.setNgayKham(new Date());
-			benhAn.setNgayXuatVien(new Date());
-			xoaDangKyKham(benhNhan);
-		} else {
-			try {
-				Date ngayKham = simpleDateFormat.parse(khamBenhDto.getNgayKham());
-				benhAn.setNgayKham(ngayKham);
-			} catch (Exception e) {
-				benhAn.setNgayKham(new Date());
+		String mess = " ";
+		try {
+			
+			// neu benh nhan chua co hoac xuat vien roi thi tao moi.
+			boolean taoBenhAnMoi = false;
+			Benhnhan benhNhan = benhnhanRepo.findByBenhnhanId(benhNhanId);
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			Benhan benhAn = null;
+			ChitietBenhAn chitietBenhAn = new ChitietBenhAn();
+			List<Benhan> dsBenhAn = benhAnRepo.findByBenhnhan(benhNhan);
+			for (Benhan benhan2 : dsBenhAn) {
+				// co benh an nhung chua xuat vien
+				if (null == benhan2.getNgayXuatVien()) {
+					benhAn = benhan2;
+					break;
+				}
 			}
 
-			try {
-				Date ngayXuatVien = simpleDateFormat.parse(khamBenhDto.getNgayXuatVien());
-				benhAn.setNgayXuatVien(ngayXuatVien);
-				// neu xuat xoa khoi danh sach benh nhan
-				LOGGER.info("xoa dang ky kham");
-				xoaDangKyKham(benhNhan);
-			} catch (Exception e) {
-				benhAn.setNgayXuatVien(null);
+			// neu chua cho benh an nao, hoac toan la xuat vien het roi
+			if (null == benhAn) {
+				benhAn = new Benhan();
+				taoBenhAnMoi = true;
 			}
+			
+			if (taoBenhAnMoi == true) {
+				benhAn.setChuanDoan(khamBenhDto.getChuanDoan());
+				benhAn.setDanDo(khamBenhDto.getDanDo());
+				benhAn.setLoaiDieuTri(khamBenhDto.isLoaiDieuTri());
+				benhAn.setMoTaBenh(khamBenhDto.getMoTaBenh());
+
+				if (!khamBenhDto.isLoaiDieuTri()) {
+					// neu ngoai tru thi ngay kham - ngay xuat va xoa khoi ds
+					// benh nhan.
+					try {
+						benhAn.setNgayKham(simpleDateFormat.parse(khamBenhDto.getNgayKham()));
+					} catch (Exception e) {
+						benhAn.setNgayKham(new Date());
+					}
+
+					Date ngayXuatVien = null;
+					try {
+						ngayXuatVien = simpleDateFormat.parse(khamBenhDto.getNgayXuatVien());
+					} catch (Exception e) {
+						ngayXuatVien = null;
+					}
+					if (null != ngayXuatVien) {
+						benhAn.setNgayXuatVien(ngayXuatVien);
+
+						LOGGER.info("xoa dang ky kham");
+						xoaDangKyKham(benhNhan);
+					}
+				} else {
+					try {
+						Date ngayKham = simpleDateFormat.parse(khamBenhDto.getNgayKham());
+						benhAn.setNgayKham(ngayKham);
+					} catch (Exception e) {
+						benhAn.setNgayKham(new Date());
+					}
+
+					try {
+						Date ngayXuatVien = simpleDateFormat.parse(khamBenhDto.getNgayXuatVien());
+						benhAn.setNgayXuatVien(ngayXuatVien);
+
+						LOGGER.info("xoa dang ky kham");
+						xoaDangKyKham(benhNhan);
+					} catch (Exception e) {
+						benhAn.setNgayXuatVien(null);
+					}
+				}
+
+				Bacsi bacsi = bacsiRepo.findByUser(user);
+
+				benhAn.setBenhnhan(benhNhan);
+				benhAn.setBacsi(bacsi);
+				benhAnRepo.save(benhAn);
+
+				chitietBenhAn.setBenhan(benhAn);
+				chitietBenhAn.setChanDoan(benhAn.getChuanDoan());
+				chitietBenhAn.setNgayKham(benhAn.getNgayKham());
+				// chitietBenhAnRepo.save(chitietBenhAn);
+			} else {
+				try {
+					Date ngayXuatVien = simpleDateFormat.parse(khamBenhDto.getNgayXuatVien());
+					if (null != ngayXuatVien) {
+						benhAn.setNgayXuatVien(ngayXuatVien);
+
+						LOGGER.info("xoa dang ky kham");
+						xoaDangKyKham(benhNhan);
+					}
+
+				} catch (Exception e) {
+					// benhAn.setNgayXuatVien(null);
+				}
+				benhAnRepo.save(benhAn);
+
+				chitietBenhAn.setBenhan(benhAn);
+				chitietBenhAn.setChanDoan(khamBenhDto.getChuanDoan());
+				try {
+					Date ngayKham = simpleDateFormat.parse(khamBenhDto.getNgayKham());
+					chitietBenhAn.setNgayKham(ngayKham);
+				} catch (Exception e) {
+					chitietBenhAn.setNgayKham(new Date());
+				}
+
+			}
+
+
+			Toathuoc toaThuoc = new Toathuoc();
+			// toaThuoc.setChitiettoa(dschitiettoa);
+			toaThuoc.setChitietBenhAn(chitietBenhAn);
+
+			chitietBenhAn.setToathuoc(toaThuoc);
+			chitietBenhAnRepo.save(chitietBenhAn);
+			// Set<Chitiettoa> dschitiettoa = new HashSet<Chitiettoa>(0);
+			for (ThuocDto thuocDto : dsThuoc) {
+				Chitiettoa chiTietToa = new Chitiettoa();
+				chiTietToa.setTenThuoc(thuocDto.getTenThuoc());
+				chiTietToa.setDonVi(thuocDto.getDonVi());
+				chiTietToa.setSoLuong(thuocDto.getSoLuong());
+				chiTietToa.setToathuoc(toaThuoc);
+
+				chitiettoaRepo.save(chiTietToa);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// mess = "Du Lieu Khong Hop Le";
+			// dsThuoc.clear();
+			//
+			// ModelAndView mav = new ModelAndView("khambenh");
+			// mav.addObject("khamBenh", khamBenhDto);
+			// mav.addObject("mess", mess);
+			// return mav;
 		}
 
-		Bacsi bacsi = bacsiRepo.findByUser(user);
-
-		benhAn.setBenhnhan(benhNhan);
-		benhAn.setBacsi(bacsi);
-		benhAnRepo.save(benhAn);
-		
-		// save thuoc to db
-		Toathuoc toaThuoc = new Toathuoc();
-		//toaThuoc.setChitiettoa(dschitiettoa);
-		toaThuoc.setBenhan(benhAn);
-		//save toa thuoc to db.
-		toathuocRepo.save(toaThuoc);
-		//Set<Chitiettoa> dschitiettoa = new HashSet<Chitiettoa>(0);
-		for (ThuocDto thuocDto : dsThuoc) {
-			Chitiettoa chiTietToa = new Chitiettoa();
-			chiTietToa.setTenThuoc(thuocDto.getTenThuoc());
-			chiTietToa.setDonVi(thuocDto.getDonVi());
-			chiTietToa.setSoLuong(thuocDto.getSoLuong());
-			chiTietToa.setToathuoc(toaThuoc);
-			//save chit tiet  toa thuoc to db
-			chitiettoaRepo.save(chiTietToa);
-		}
+		mess = "Luu Thanh Cong";
 		dsThuoc.clear();
+
 		ModelAndView mav = new ModelAndView("khambenh");
 		mav.addObject("khamBenh", khamBenhDto);
+		mav.addObject("mess", mess);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/henlichkham", method = RequestMethod.GET)
 	public ModelAndView showAdmin(HttpServletRequest request, Model model) {
 		LOGGER.debug("Rendering henlichkham page.");
@@ -256,22 +347,21 @@ public class BacSiController {
 		LOGGER.info("username {}", email);
 
 		User user = repository.findByEmail(email);
-		Bacsi bacsi = bacsiRepo.findByUser(user);
-		List<DKKham> dsDkKham = dkKhamRepo.findByBacsi(bacsi);
-		System.out.println("  " + dsDkKham.size());
-
-		List<BenhNhanDto> BenhNhans = new ArrayList<BenhNhanDto>();
-		for (DKKham dkKham : dsDkKham) {
-			if (dkKham.isHenLich() == false) {
-				BenhNhanDto benhNhanDto = new BenhNhanDto();
-				benhNhanDto.setBenhnhan_id(dkKham.getBenhnhan().getBenhnhan_id());
-				benhNhanDto.setHo(dkKham.getBenhnhan().getHo());
-				benhNhanDto.setTen(dkKham.getBenhnhan().getTen());
-				BenhNhans.add(benhNhanDto);
-			}
-		}
+		/*
+		 * Bacsi bacsi = bacsiRepo.findByUser(user); List<DKKham> dsDkKham =
+		 * dkKhamRepo.findByBacsi(bacsi); System.out.println("  " +
+		 * dsDkKham.size());
+		 * 
+		 * List<BenhNhanDto> BenhNhans = new ArrayList<BenhNhanDto>(); for
+		 * (DKKham dkKham : dsDkKham) { if (dkKham.isHenLich() == false) {
+		 * BenhNhanDto benhNhanDto = new BenhNhanDto();
+		 * benhNhanDto.setBenhnhan_id(dkKham.getBenhnhan().getBenhnhan_id());
+		 * benhNhanDto.setHo(dkKham.getBenhnhan().getHo());
+		 * benhNhanDto.setTen(dkKham.getBenhnhan().getTen());
+		 * BenhNhans.add(benhNhanDto); } }
+		 */
 		ModelAndView mav = new ModelAndView("henlichkham");
-		mav.addObject("benhNhans", BenhNhans);
+		// mav.addObject("benhNhans", BenhNhans);
 		return mav;
 	}
 

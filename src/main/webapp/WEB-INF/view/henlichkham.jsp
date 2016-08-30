@@ -6,7 +6,6 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!-- InstanceBeginEditable name="noidungchinh" -->
     <div class="container">
 		<div class=" col-lg-12 tieude">
@@ -35,6 +34,12 @@
           			<label for="giokham">Giờ Khám:</label>
            			<input path=""  type ="text" name="giokham" id="giokham" size="30" maxlength="20" />
         		</p>
+        		
+        		<!------------ Trieu chung ----------------->
+		        <p>
+		          <label for="trieuchung">Triệu Chứng: </label>
+		          <input path=""  type ="text" name="trieuchung" id="trieuchung" size="30" maxlength="20" />
+		        </p>
 	        </div> <!-- end henlich -->
 	        
 	        <div style="clear:both"></div>
@@ -42,7 +47,7 @@
 	        <!------------ Button Chuc Nang ----------------->
 	        <div class="but_chucnang">
 	            <!--Button luu-->
-	             <input type="button" onclick="DatLichFunction()"  value="Đặt Lịch" class="but_datlich" />
+	             <input type="button" onclick="DatLichFunction()"  value="Hẹn Lịch" class="but_datlich" />
 	            	<label id="mess" for="mess"></label>
 	            <!-- <button type="button" name="" value="" class="but_datlich" data-text="Đặt Lịch"><span>Đặt Lịch</span>
 	            </button> -->
@@ -52,14 +57,14 @@
 	        <div class="clean0"></div> 
 	        
 	        <div style="min-height:150px; width:70%;overflow:auto; float:left; margin-top: 50px">
-			<table width="100%" border="1">
+			<%-- <table width="100%" border="1">
         	<tr>
             	<th width="16%">STT</th>
                 <th width="29%">Mã Bệnh Nhân</th>
                 <th width="24%">Họ</th>
                 <th width="31%">Tên</th>
                 <th width="29%">Hẹn Lịch</th>
-            </tr>
+            </tr>s
             <c:forEach items="${benhNhans}" var="benhnhan" varStatus="status">  
             <tr>
             	<td>${status.index + 1}</td> 
@@ -70,7 +75,7 @@
             </tr>
             </c:forEach>
             
-        </table>
+        </table> --%>
 			</div><!---end div table---> 
 		</form>
 
@@ -86,10 +91,11 @@
 			 var id = $('#mabenhnhan').val();
 			 var ngaykham = $('#ngaykham').val(); 
 			 var giokham = $('#giokham').val();
+			 var trieuchung = $('#trieuchung').val();
 			 console.log("HenFunction id "+ id  + "ngaykham" + ngaykham + "giokham" + giokham);
 		 	$.ajax({
 		 		type : "GET",
-				url : 'henlich?mabenhnhan=' + id + " &ngaykham=" + ngaykham + "&giokham=" +giokham,			
+				url : 'henlich?mabenhnhan=' + id + " &ngaykham=" + ngaykham + "&giokham=" +giokham +"&trieuchung=" + trieuchung,			
 				success : function(data) {
 					var str = data;
 					console.log("data" +data);

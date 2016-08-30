@@ -40,16 +40,6 @@
             </p>
           <%-- </form> --%>
           
-          <!------------ Loai Kham ----------------->
-        <p>
-            <label for="bacsy">Tên Bệnh : </label>
-            <select name="bacsy" id="bacsy" > 
-                <option value="#">Kiet Suc</option>
-                <option value="#">def</option>
-                <option value="#">Sot Sieu vi</option>
-            </select>
-        </p>
-          
       </div><!---end thongtin_kb--->
 
       <div class="clean0"></div>
@@ -58,7 +48,7 @@
             <!------------ FORM NGAY KHAM ----------------->
             <p>
               <label for="ngaykham">Ngày khám: </label>
-              <form:input path="ngayKham" name="ngaykham" id="ngaykham" size="30" maxlength="20" />
+              <form:input path="ngayKham" name="ngaykham" id="ngaykham" size="30" maxlength="20" placeholder="DD-MM-YYYY" />
             </p>
         	
             <!------------ FORM MO TA ----------------->
@@ -76,14 +66,14 @@
             
             <!------------ FORM NOI/NGOAI TRU ----------------->
             <p>
-                <label for="loaidieutri">Loại Điều Trị: </label>
-                <form:checkbox path="loaiDieuTri" />
+                <label for="loaidieutri">Loại Điều Trị: (Nội trú)</label>
+                <form:checkbox path="loaiDieuTri" /> 
             </p>
             
             <!------------ FORM NGAY XUAT VIEN ----------------->
           	<p>
               <label for="ngaynhapvien">Ngày Xuất viện: </label>
-               <form:input path="ngayXuatVien" name="ngaykham" id="ngaykham" size="30" maxlength="20" />
+               <form:input path="ngayXuatVien" name="ngaykham" id="ngaykham" size="30" maxlength="20" placeholder="DD-MM-YYYY"/>
              
             </p>
             
@@ -131,9 +121,9 @@
 		                <th width="29%">Tên Thuốc</th>
 		                <th width="20%">Đơn Vị Tính</th>
 		                <th width="25%">Số Lượng</th>
-		               
 		            </tr>
 		        </table>
+		        <label for="mess">${mess}</label>
 		         <button type="submit" name="" value="" class="but_luuthuoc" data-text="Lưu"><span>Lưu</span></button>
       	 </form:form>
        
@@ -164,6 +154,6 @@
 	});
    }
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 </body>
 <!-- InstanceEnd --></html>

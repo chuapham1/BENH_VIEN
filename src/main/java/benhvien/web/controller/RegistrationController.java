@@ -89,18 +89,31 @@ public class RegistrationController {
 	public ModelAndView createBacsi(@ModelAttribute("user") @Valid UserDto accountDto, BindingResult result,
 			WebRequest request, Errors errors) throws EmailExistsException {
 		LOGGER.info("Registering user bac si account with information: {}", accountDto);
-		if (result.hasErrors()) {
-			LOGGER.info("result.hasErrors");
-			return new ModelAndView("admin", "user", accountDto);
-		}
-
 		User registered = createBacsiAccount(accountDto);
-		if (registered == null) {
-			result.rejectValue("email", "message.regError");
-			return new ModelAndView("emailError", "user", accountDto);
+		String mess = "";
+		try{
+			ModelAndView mav = new ModelAndView("admin", "user", accountDto);
+			mav.addObject("mess", "Dang ky thanh cong");
+			LOGGER.info("thanh cong");
+			return mav;
+//			return new ModelAndView("admin", "user", accountDto);
 		}
-		LOGGER.info("thanh cong");
-		return new ModelAndView("admin", "user", accountDto);
+		catch (Exception e){
+			/*if (registered == null) {
+				result.rejectValue("email", "message.regError");
+				return new ModelAndView("emailError", "user", accountDto);
+			}
+			
+			if (result.hasErrors()) {
+				LOGGER.info("result.hasErrors");
+				return new ModelAndView("admin", "user", accountDto);
+			}*/
+			
+			ModelAndView mav = new ModelAndView("admin", "user", accountDto);
+			mav.addObject("mess", "Du lieu khong hop le!");
+			return mav;
+		}
+		
 	}
 	
 	public User createBacsiAccount(UserDto accountDto) throws EmailExistsException {
@@ -122,7 +135,6 @@ public class RegistrationController {
 		bacsi.setTen(accountDto.getTen());		
 		bacsi.setUser(user);	
 		
-		////?????
 		user.setBacsi(bacsi);    
 		return repository.save(user);
 	}
@@ -191,6 +203,7 @@ public class RegistrationController {
 		}
 		return false;
 	}
+	
 	// tao ma benh nhan
 	private String generateAlias() {
 		char[] chars = "1234567890abcdefghijklmnopqrstuvwxyz".toCharArray();

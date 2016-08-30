@@ -3,6 +3,7 @@ package benhvien.persistence.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,34 +12,35 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Toathuoc {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long maToa;
-	
-	@OneToMany(fetch = FetchType.EAGER , mappedBy = "toathuoc")
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "toathuoc")
 	private Set<Chitiettoa> chitiettoa = new HashSet<Chitiettoa>(0);
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "benhan_id", nullable = false)
-	private Benhan benhan;
-	
+
+	@OneToOne(targetEntity = ChitietBenhAn.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "chitietbenhan_id") // column cua bang role trong db ma
+	private ChitietBenhAn chitietBenhAn;
+
 	public Long getMaToa() {
 		return maToa;
 	}
 
 	public void setMaToa(Long maToa) {
-		maToa = maToa;
+		this.maToa = maToa;
 	}
 
-	public Benhan getBenhan() {
-		return benhan;
+	public ChitietBenhAn getChitietBenhAn() {
+		return chitietBenhAn;
 	}
 
-	public void setBenhan(Benhan benhan) {
-		this.benhan = benhan;
+	public void setChitietBenhAn(ChitietBenhAn chitietBenhAn) {
+		this.chitietBenhAn = chitietBenhAn;
 	}
 
 	public Set<Chitiettoa> getChitiettoa() {
@@ -48,12 +50,6 @@ public class Toathuoc {
 	public void setChitiettoa(Set<Chitiettoa> chitiettoa) {
 		this.chitiettoa = chitiettoa;
 	}
-
-
-
 	
 
-
-	
-	
 }

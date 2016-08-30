@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import benhvien.persistence.dao.BacsiRepo;
 import benhvien.persistence.dao.BenhAnRepo;
 import benhvien.persistence.dao.BenhnhanRepo;
+import benhvien.persistence.dao.ChitietBenhAnRepo;
 import benhvien.persistence.dao.ChitiettoaRepo;
 import benhvien.persistence.dao.DKKhamRepo;
 import benhvien.persistence.dao.ToathuocRepo;
@@ -33,6 +34,7 @@ import benhvien.persistence.dao.UserRepository;
 import benhvien.persistence.model.Bacsi;
 import benhvien.persistence.model.Benhan;
 import benhvien.persistence.model.Benhnhan;
+import benhvien.persistence.model.ChitietBenhAn;
 import benhvien.persistence.model.Chitiettoa;
 import benhvien.persistence.model.DKKham;
 import benhvien.persistence.model.Toathuoc;
@@ -64,6 +66,9 @@ public class BenhNhanController {
 	@Autowired
 	private ToathuocRepo toathuocRepo;
 
+	@Autowired
+	private ChitietBenhAnRepo chitietBenhAnRepo;
+	
 	@Autowired
 	private ChitiettoaRepo chitiettoaRepo;
 
@@ -171,25 +176,28 @@ public class BenhNhanController {
 	public ModelAndView chiTiet(HttpServletRequest request, Model model, @PathVariable("id") Long benhAnId) {
 		LOGGER.info("chitiet page controller ");
 		Benhan benhAn = benhAnRepo.findByBenhAnId(benhAnId);
+		
+		List<ChitietBenhAn> dsChitietBenhAn = chitietBenhAnRepo.findByBenhan(benhAn);
+		ChitietBenhAn chitietBenhAn = dsChitietBenhAn.get(0);
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		KhamBenhDto khambenhDto = new KhamBenhDto();
-		khambenhDto.setBenhan_id(benhAn.getBenhAnId());
-		khambenhDto.setNgayKham(dateFormat.format(benhAn.getNgayKham()));
-		if (benhAn.getNgayXuatVien() != null) {
-			khambenhDto.setNgayXuatVien(dateFormat.format(benhAn.getNgayXuatVien()));
-		}
-		khambenhDto.setMoTaBenh(benhAn.getMoTaBenh());
-		khambenhDto.setChuanDoan(benhAn.getChuanDoan());
+		//khambenhDto.setBenhan_id(benhAn.getBenhAnId());
+		khambenhDto.setNgayKham(dateFormat.format(chitietBenhAn.getNgayKham()));
+//		if (benhAn.getNgayXuatVien() != null) {
+//			khambenhDto.setNgayXuatVien(dateFormat.format(benhAn.getNgayXuatVien()));
+//		}
+		//khambenhDto.setMoTaBenh(benhAn.getMoTaBenh());
+		khambenhDto.setChuanDoan(chitietBenhAn.getChanDoan());
 		khambenhDto.setTenBacSi(benhAn.getBacsi().getHo() + benhAn.getBacsi().getTen());
-		LOGGER.info("toathuoc {}", toathuocRepo.findByBenhan(benhAn).size());
+		LOGGER.info("toathuoc {}", toathuocRepo.findByChitietBenhAn(chitietBenhAn).size());
 
 		List<Long> maToas = new ArrayList<Long>();
-		List<Toathuoc> dsToaThuoc = toathuocRepo.findByBenhan(benhAn);
-		for (Toathuoc toathuoc : dsToaThuoc) {
-			maToas.add(toathuoc.getMaToa());
+		List<Toathuoc> dsToaThuoc = toathuocRepo.findByChitietBenhAn(chitietBenhAn);
+		for (ChitietBenhAn chitietbenhan : dsChitietBenhAn) {
+			maToas.add(chitietbenhan.getCtBenhanId());
 		}
-
-		Toathuoc toathuoc = toathuocRepo.findByBenhan(benhAn).get(0);
+//1 ct benh an co 1 toa thuoc
+		Toathuoc toathuoc = dsToaThuoc.get(0);
 		List<Chitiettoa> dsChiTietToa = chitiettoaRepo.findByToathuoc(toathuoc);
 
 		List<ThuocDto> dsChiTietToaDto = new ArrayList<ThuocDto>();
@@ -200,7 +208,7 @@ public class BenhNhanController {
 		}
 
 		SearchDto searchDto = new SearchDto();
-		searchDto.setMaToa(toathuoc.getMaToa());
+		searchDto.setMaToa(chitietBenhAn.getCtBenhanId());
 		ModelAndView mav = new ModelAndView("chitiet", "search", searchDto);
 		mav.addObject("benhAn", khambenhDto);
 		mav.addObject("dsChiTietToa", dsChiTietToaDto);
@@ -214,25 +222,28 @@ public class BenhNhanController {
 			@ModelAttribute("search") SearchDto search) {
 		LOGGER.info("chitiet page controller ");
 		Benhan benhAn = benhAnRepo.findByBenhAnId(benhAnId);
+		List<ChitietBenhAn> dsChitietBenhAn = chitietBenhAnRepo.findByBenhan(benhAn);
+		//ma toa la ma chi tiet
+		ChitietBenhAn chitietBenhAn = chitietBenhAnRepo.findByCtBenhanId(search.getMaToa());
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		KhamBenhDto khambenhDto = new KhamBenhDto();
-		khambenhDto.setBenhan_id(benhAn.getBenhAnId());
-		khambenhDto.setNgayKham(dateFormat.format(benhAn.getNgayKham()));
-		if (benhAn.getNgayXuatVien() != null) {
-			khambenhDto.setNgayXuatVien(dateFormat.format(benhAn.getNgayXuatVien()));
-		}
-		khambenhDto.setMoTaBenh(benhAn.getMoTaBenh());
-		khambenhDto.setChuanDoan(benhAn.getChuanDoan());
+		//khambenhDto.setBenhan_id(benhAn.getBenhAnId());
+		khambenhDto.setNgayKham(dateFormat.format(chitietBenhAn.getNgayKham()));
+//		if (benhAn.getNgayXuatVien() != null) {
+//			khambenhDto.setNgayXuatVien(dateFormat.format(benhAn.getNgayXuatVien()));
+//		}
+		//khambenhDto.setMoTaBenh(benhAn.getMoTaBenh());
+		khambenhDto.setChuanDoan(chitietBenhAn.getChanDoan());
 		khambenhDto.setTenBacSi(benhAn.getBacsi().getHo() + benhAn.getBacsi().getTen());
-		LOGGER.info("toathuoc {}", toathuocRepo.findByBenhan(benhAn).size());
+		LOGGER.info("toathuoc {}", toathuocRepo.findByChitietBenhAn(chitietBenhAn).size());
 
 		List<Long> maToas = new ArrayList<Long>();
-		List<Toathuoc> dsToaThuoc = toathuocRepo.findByBenhan(benhAn);
-		for (Toathuoc toathuoc : dsToaThuoc) {
-			maToas.add(toathuoc.getMaToa());
+		List<Toathuoc> dsToaThuoc = toathuocRepo.findByChitietBenhAn(chitietBenhAn);
+		for (ChitietBenhAn chitietbenhan : dsChitietBenhAn) {
+			maToas.add(chitietbenhan.getCtBenhanId());
 		}
-
-		Toathuoc toathuoc = toathuocRepo.findByMaToa(search.getMaToa());
+//1 ct benh an co 1 toa thuoc
+		Toathuoc toathuoc = dsToaThuoc.get(0);
 		List<Chitiettoa> dsChiTietToa = chitiettoaRepo.findByToathuoc(toathuoc);
 
 		List<ThuocDto> dsChiTietToaDto = new ArrayList<ThuocDto>();
@@ -243,7 +254,7 @@ public class BenhNhanController {
 		}
 
 		SearchDto searchDto = new SearchDto();
-		searchDto.setMaToa(toathuoc.getMaToa());
+		searchDto.setMaToa(chitietBenhAn.getCtBenhanId());
 		ModelAndView mav = new ModelAndView("chitiet", "search", searchDto);
 		mav.addObject("benhAn", khambenhDto);
 		mav.addObject("dsChiTietToa", dsChiTietToaDto);
