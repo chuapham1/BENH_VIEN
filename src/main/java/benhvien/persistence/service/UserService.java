@@ -17,9 +17,6 @@ public class UserService implements IUserService {
     @Autowired
     private UserRepository repository;
 
-//    @Autowired
-//    private VerificationTokenRepository tokenRepository;
-
     @Autowired
     private HashGenerator hashGenerator;
 
@@ -37,17 +34,7 @@ public class UserService implements IUserService {
         user.setRole(new Role(Integer.valueOf(1), user));
         return repository.save(user);
     }
-//
-//    @Override
-//    public User getUser(String verificationToken) {
-//        User user = tokenRepository.findByToken(verificationToken).getUser();
-//        return user;
-//    }
 
-//    @Override
-//    public VerificationToken getVerificationToken(String VerificationToken) {
-//        return tokenRepository.findByToken(VerificationToken);
-//    }
 
     @Override
     public void saveRegisteredUser(User user) {
@@ -58,12 +45,6 @@ public class UserService implements IUserService {
     public void deleteUser(User user) {
         repository.delete(user);
     }
-//
-//    @Override
-//    public void createVerificationTokenForUser(User user, String token) {
-//        VerificationToken myToken = new VerificationToken(token, user);
-//        tokenRepository.save(myToken);
-//    }
 
     private boolean emailExist(String email) {
         User user = repository.findByEmail(email);

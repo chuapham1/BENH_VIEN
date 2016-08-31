@@ -13,7 +13,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Configuration
-@ComponentScan(basePackages = { "benhvien.event.service", "benhvien.event", "benhvien.persistence.service", "benhvien.persistence.dao" })
+@ComponentScan(basePackages = { "benhvien.persistence.service", "benhvien.persistence.dao" })
 @Import({ MvcConfig.class, PersistenceJPAConfig.class, SecSecurityConfig.class})
 @PropertySource("classpath:application.properties")
 public class AppConfig {
@@ -25,19 +25,6 @@ public class AppConfig {
         return new PropertySourcesPlaceholderConfigurer();
     }
 
-    @Bean
-    public JavaMailSenderImpl javaMailSenderImpl() {
-        JavaMailSenderImpl mailSenderImpl = new JavaMailSenderImpl();
-        mailSenderImpl.setHost(env.getProperty("smtp.host"));
-        mailSenderImpl.setPort(env.getProperty("smtp.port", Integer.class));
-        mailSenderImpl.setProtocol(env.getProperty("smtp.protocol"));
-        mailSenderImpl.setUsername(env.getProperty("smtp.username"));
-        mailSenderImpl.setPassword(env.getProperty("smtp.password"));
-        Properties javaMailProps = new Properties();
-        javaMailProps.put("mail.smtp.auth", true);
-        javaMailProps.put("mail.smtp.starttls.enable", true);
-        mailSenderImpl.setJavaMailProperties(javaMailProps);
-        return mailSenderImpl;
-    }
+
 
 }

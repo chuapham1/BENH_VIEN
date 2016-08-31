@@ -11,7 +11,7 @@
 			<h1 class="alert alert-error">
 				<spring:message code="message.email.config.error"></spring:message>
 			</h1>
-			
+			<p>Back to SignUp</p>
 		</div>
 	</div>
 </body>
